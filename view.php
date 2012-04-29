@@ -67,7 +67,7 @@ if($isAdmin) {
 
 // iframe 걸러내기
 $securityMsg = '';
-if($isAdmin) $securityMsg = '<p style="color: red; font-weight: bold;">이 게시물에 ifream이 삽입되어있습니다.<br />글쓴이가 악의적으로 삽입한 것인지 확인 후 조치를 취해주세요.</p>';
+if($isAdmin) $securityMsg = '<p style="color: red; font-weight: bold;">이 게시물에 iframe이 삽입되어있습니다.<br />글쓴이가 악의적으로 삽입한 것인지 확인 후 조치를 취해주세요.</p>';
 $view['content'] = preg_replace('/<iframe[^>]+>(\s*<\/iframe>)?/is', $securityMsg, $view['content']);
 
 // Script 걸러내기
@@ -146,12 +146,12 @@ if(!$_SESSION['no']) {
 }
 
 // 제목, 내용 값 처리
-$subject = stripslashes($view['subject']);
-$content = str_replace('&amp;nbsp;', '&nbsp;', nl2br(stripslashes($view['content'])));
+$subject = $view['subject'];
+$content = nl2br($view['content']);
 
 // 내용 중 검색어는 하이라이트 @sirini
 if($searchText) {
-	$searchText = stripslashes(urldecode($searchText));
+	$searchText = urldecode($searchText);
 	$content = str_replace($searchText, '<span class="findMe">'.$searchText.'</span>', $content);
 }
 

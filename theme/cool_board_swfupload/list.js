@@ -62,6 +62,13 @@ vmBtn.onclick = function() {
 	return false;
 };
 
+// 내정보 버튼 클릭 시 처리
+var viBtn = _('viewInfoBtn');
+viBtn.onclick = function() {
+        window.open(this.href, 'infoView', 'width=650, height=600, menubar=no, scrollbars=yes');
+        return false;
+};
+
 // RSS 버튼 클릭 시 처리
 var rssBtn = _('viewRssBtn');
 rssBtn.onclick = function() {

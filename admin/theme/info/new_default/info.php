@@ -141,7 +141,7 @@ if($enableJumin) { ?>
 				</tr>
 				<tr>
 					<th scope="row">자기소개</th>
-					<td><textarea name="self_info" class="textarea" rows="5" cols="60" style="width: 380px;"><?php echo stripslashes($member['self_info']); ?></textarea> <p class="info">HTML 태그는 &lt;img&gt;, &lt;p&gt;, &lt;strong&gt;, &lt;br /&gt; 만 사용 가능합니다.</p></td>
+					<td><textarea name="self_info" class="textarea" rows="5" cols="60" style="width: 380px;"><?php echo htmlspecialchars($member['self_info']); ?></textarea> <p class="info">HTML 태그는 &lt;img&gt;, &lt;p&gt;, &lt;strong&gt;, &lt;br /&gt; 만 사용 가능합니다.</p></td>
 				</tr>
 			</table>
 	  </div>

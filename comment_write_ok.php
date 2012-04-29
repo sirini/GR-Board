@@ -111,37 +111,34 @@ if($getArticleOption['no'] && !$getArticleOption['reply_open']) $GR->error('이 
 // 회원의 기본 정보를 가져온다. @sirini
 if($isMember) {
 	$memberData = $GR->getArray("select no, nickname, password, email, homepage from {$dbFIX}member_list where no = '$sessionNo'");
-	$name = $memberData['nickname'];
-	$password = $memberData['password'];
-	$email = $memberData['email'];
-	$homepage = $memberData['homepage'];
-	if(!$_POST['useCoEditor']) $content = $GR->escape(str_replace("\t", '&nbsp;&nbsp;&nbsp;&nbsp;', htmlspecialchars(stripslashes($content))));
+	$name = $GR->escape($memberData['nickname']);
+	$password = $GR->escape($memberData['password']);
+	$email = $GR->escape($memberData['email']);
+	$homepage = $GR->escape($memberData['homepage']);
 }
 
 // 비회원일 경우 처리 @sirini
 else {
   
-	if($_POST['name']) $name = $GR->escape(htmlspecialchars(trim(stripslashes($_POST['name']))));
-	if($_POST['email']) $email = $GR->escape(htmlspecialchars(trim(stripslashes($_POST['email']))));
-	if($_POST['homepage']) $homepage = $GR->escape(htmlspecialchars(trim(stripslashes($_POST['homepage']))));
+	if($_POST['name']) $name = $GR->escape(htmlspecialchars(trim($GR->unescape($_POST['name']))));
+	if($_POST['email']) $email = $GR->escape(htmlspecialchars(trim($GR->unescape($_POST['email']))));
+	if($_POST['homepage']) $homepage = $GR->escape(htmlspecialchars(trim($GR->unescape($_POST['homepage']))));
 	if($_POST['password']) {
 		$tmpPassword = $GR->getArray("select password('".$_POST['password']."')");
 		$password = $tmpPassword[0];
 	}
-	if($_POST['email']) $email = $GR->escape(htmlspecialchars(trim(stripslashes($_POST['email']))));
-	if($_POST['homepage']) $homepage = $GR->escape(htmlspecialchars(trim(stripslashes($_POST['homepage']))));
 
 	// 입력폼 검사 @sirini
 	if(!$name) $GR->error('이름을 입력해 주세요', 0, 'HISTORY_BACK');
 	if(!$password) $GR->error('비밀번호를 입력해 주세요', 0, 'HISTORY_BACK');
-	if(!$_POST['useCoEditor']) $content = htmlspecialchars($content);
 }
 
 // 제목 내용 처리 @sirini
-if($_POST['content']) $content = $_POST['content'];
+if($_POST['content']) $content = $GR->unescape($_POST['content']);
 else $GR->error('내용을 입력해 주세요', 0, 'HISTORY_BACK');
-if($_POST['subject']) $subject = $GR->escape(htmlspecialchars(trim($_POST['subject'])));
+if($_POST['subject']) $subject = $GR->escape(htmlspecialchars(trim($GR->unescape($_POST['subject']))));
 else $subject = $name.' 님의 댓글';
+$content = $GR->escape(strip_tags($content, '<br><strong><p><a><li><span><font><i><img><u><ol><ul>')); //정밀 처리 필요
 $content = str_replace(array('<p>','</p>','<p>&nbsp;</p>'), '', $content);
 
 // 영어로만 입력된글 차단 @sirini

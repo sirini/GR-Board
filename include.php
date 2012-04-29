@@ -96,7 +96,7 @@ function poll($theme) {
 	$path = $grboard.'/latest/'.$theme;
 	if(!is_dir($path)) { echo 'GR Board 내의 latest 폴더 안에 지정한 '.$theme.' 테마가 존재하지 않습니다.'; return; }
 	$getSubject = $GR->getArray('select no, subject from '.$dbFIX.'poll_subject where id = \'\' order by no desc limit 1');
-	$subject = stripslashes($getSubject['subject']);
+	$subject = $getSubject['subject'];
 	$pollNo = $getSubject['no'];
 	$getOptions = $GR->query('select no, title from '.$dbFIX.'poll_option where poll_no = '.$pollNo.' order by no asc');
 	include $path.'/poll.php';

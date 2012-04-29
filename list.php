@@ -44,7 +44,6 @@ if($tableType == 'comment_') {
 	if(!$tmpFetchBoard['is_full']) $getField = 'no, member_key, name, signdate, hit, bad, category, subject, is_secret, comment_count'; else $getField = '*';
 	$getList = $GR->query('select '.$getField.' from '.$dbFIX.'bbs_'.$id.' '.$searchQue.' order by '.$sortList.' '.$sortBy.' limit '.$fromRecord.', '.$tmpFetchBoard['page_num']);
 }
-$searchText = stripslashes(stripslashes(stripslashes($searchText)));
 
 // 공지글 목록 따로 뽑고, 개수 저장 @sirini
 $getNotice = $GR->query('select '.$getField.' from '.$dbFIX.'bbs_'.$id.' where is_notice = \'1\' order by no desc');

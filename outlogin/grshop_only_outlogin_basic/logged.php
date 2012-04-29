@@ -1,11 +1,13 @@
 <?php
 // 쪽지알림 레이어 표시여부
 $msg_poupop = "1"; // 설정할경우 1, 설정하지 않을경우 빈값
+if(!$_SESSION['no']) die("로그인이 필요합니다.");
 
 // 이동할 주소 정하기
+if($_SERVER['HTTPS'] != 'on'){$protocol = "http://";} else{$protocol = "https://";}
 $boardTargetID = $_GET['id'];
 if($boardTargetID) $move = 'board.php?id='.$boardTargetID;
-else $move = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'];
+else $move = $protocol.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'];
 
 // 실명 가져오기
 $realname = @mysql_fetch_array(mysql_query('select realname from '.$dbFIX.'member_list where no = '.$_SESSION['no']));

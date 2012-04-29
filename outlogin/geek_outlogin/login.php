@@ -1,8 +1,9 @@
 <?php
 // 이동할 주소 정하기
+if($_SERVER['HTTPS'] != 'on'){$protocol = "http://";} else{$protocol = "https://";}
 $boardTargetID = $_GET['id'];
 if($boardTargetID) $move = 'board.php?id='.$boardTargetID;
-else $move = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'];
+else $move = $protocol.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'];
 ?>
 <div id="grLoginForm">
 	<form id="login" method="post" action="<?php echo $grboard; ?>/login_ok.php">

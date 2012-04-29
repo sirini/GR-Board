@@ -55,7 +55,7 @@ $getName = $GR->getArray('select nickname from '.$dbFIX.'member_list where no = 
 				$getArticles = $GR->query("select no, subject, signdate from {$dbFIX}bbs_".$bbs['id']." where member_key = '$user' order by no desc limit 20");
 				while($article = $GR->fetch($getArticles))
 				{
-					echo '<li><a href="board.php?id='.$bbs['id'].'&amp;articleNo='.$article['no'].'">'.stripslashes($article['subject']).'</a> ('.date('Y. m. d  H:i', $article['signdate']).')</li>';
+					echo '<li><a href="board.php?id='.$bbs['id'].'&amp;articleNo='.$article['no'].'">'.strip_tags($article['subject']).'</a> ('.date('Y. m. d  H:i', $article['signdate']).')</li>';
 				}
 				echo '</ul>';
 			}

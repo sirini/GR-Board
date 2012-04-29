@@ -15,7 +15,7 @@
 	<a href="<?php echo $grboard; ?>/board.php?id=<?php echo $id; ?>&amp;page=<?php echo $page; ?>&amp;searchOption=<?php echo $searchOption; ?>&amp;searchText=<?php echo urlencode($searchText); ?>" title="글 목록을 봅니다.">목록</a>
 	
 	<?php if($isMember): /* 여기서부터는 로그인 후 출력 */ ?>
-		<a href="<?php echo $grboard; ?>/info.php?boardId=<?php echo $id; ?>" title="내 정보를 봅니다.">내정보</a>
+		<a href="<?php echo $grboard; ?>/info.php" id="viewInfoBtn" title="내 정보를 봅니다.">내정보</a>
 		<a href="<?php echo $grboard; ?>/logout.php?id=<?php echo $id; ?>" title="로그아웃 합니다.">로그아웃</a>
 		<a href="<?php echo $grboard; ?>/view_memo.php" id="viewMemoBtn" title="내 쪽지함을 열어 봅니다.">쪽지함</a>
 	<?php endif; ?>

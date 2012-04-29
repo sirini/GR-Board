@@ -40,7 +40,7 @@ if(!empty($boardID) && ($setup['head_file'] || $setup['head_form'])) {
 	if($setup['head_form']) {
 		$setup['head_form'] = str_replace('[theme]', $grboard.'/'.$theme, $setup['head_form']);
 		$setup['head_form'] = str_replace('</head>', '<link rel="stylesheet" href="'.$grboard.'/admin/theme/outlogin/'.$getOutlogin['var'].'/style.css" type="text/css" title="style" /></head>', $setup['head_form']);
-		echo stripslashes($setup['head_form']);
+		echo $setup['head_form'];
 	}
 
 // 상/하단이 없을 시 @sirini
@@ -58,7 +58,7 @@ include 'admin/theme/outlogin/'.$getOutlogin['var'].'/login.php';
 <?php
 // 하단 설정 @sirini
 if($boardID || $boardId) {
-	if($setup['foot_form']) echo stripslashes($setup['foot_form']);
+	if($setup['foot_form']) echo $setup['foot_form'];
 	if($setup['foot_file']) include $setup['foot_file'];
 }
 else { ?></body></html><?php } ?>

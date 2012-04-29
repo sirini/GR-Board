@@ -9,7 +9,7 @@ $S = new SEARCH;
 
 // 결과값 주기
 if($_POST['searchText']) {
-	$list = $S->totalSearch($_POST['searchText'], 'subject', 0, $_POST['listNum'], $_POST['type'], $_SESSION['no']);
+	$list = $S->totalSearch($_POST['searchText'], 'subject', 0, $_POST['listNum'], $_POST['type']);
 	$size = @count($list);
 	if($size > $_POST['listNum']) $size = $_POST['listNum'];
 	if(!$list[0]['no']) {
@@ -18,7 +18,7 @@ if($_POST['searchText']) {
 	}
 	$xml  = '<?xml version="1.0" encoding="utf-8"?><lists>';
 	for($i=0; $i<$size; $i++) {
-		$xml .= '<item no="'.$list[$i]['no'].'"><title>'.stripslashes($list[$i]['subject']).'</title>';
+		$xml .= '<item no="'.$list[$i]['no'].'"><title>'.strips_tags($list[$i]['subject']).'</title>';
 		$xml .= '<boardID>'.$list[$i]['id'].'</boardID></item>';
 	}
 	$xml .= '</lists>';
