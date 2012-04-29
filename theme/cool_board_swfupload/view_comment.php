@@ -16,7 +16,7 @@
 			<span class="name" onclick="getMember(<?php echo (($comment['member_key'])?$comment['member_key']:0).','.(($_SESSION['no'])?$_SESSION['no']:0); ?>, event);">
 				<?php echo $comment['name']; ?>
 			</span> 
-			<?php echo $comment['homepage'].$comment['email']; ?>
+			<?php echo $comment['homepage']; ?>
 			(<?php echo $comment['signdate']; ?>
 			<?php if($isAdmin or $isMaster) echo '/ '.$comment['ip']; ?>) 
 			<a href="<?php echo $grboard; ?>/board.php?id=<?php echo $id; ?>&amp;articleNo=<?php echo $articleNo; ?>&amp;replyTarget=<?php echo $comment['no']; ?>&amp;commentPage=<?php echo $_GET['commentPage']; ?>&amp;page=<?php echo $page; ?>#read<?php echo $comment['no']; ?>" onclick="setPos(event);">

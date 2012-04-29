@@ -71,6 +71,7 @@ elseif($_POST['searchText']) {
 	$searchText = urldecode(htmlspecialchars($_POST['searchText']));
 	$searchText = str_replace("'","''",$_POST['searchText']);
 }
+if($tmpFetchBoard['view_level'] != 1 && $tmpFetchBoard['view_level'] > $_SESSION['level']){unset($searchOption); unset($searchText);} //차후 권한 세분화 필요 by pico
 $grboard = str_replace('/'.end(explode('/', $_SERVER['REQUEST_URI'])), '', $_SERVER['REQUEST_URI']);
 
 // 테마에 사용될 기본변수 정리
@@ -92,7 +93,7 @@ if($extendDir){
 
 // 상단에 불러올 파일과 내용을 처리
 if($tmpFetchBoard['head_file']) include $tmpFetchBoard['head_file'];
-echo str_replace('[theme]', $grboard.'/theme/'.$tmpThemeName, stripslashes($tmpFetchBoard['head_form']));
+echo str_replace('[theme]', $grboard.'/theme/'.$tmpThemeName, $tmpFetchBoard['head_form']);
 
 // 목록 혹은 내용 보기
 if(empty($articleNo)) include 'list.php';
@@ -102,6 +103,6 @@ else {
 }
 
 // 하단에 불러올 파일과 내용을 처리한다.
-echo stripslashes($tmpFetchBoard['foot_form']);
+echo $tmpFetchBoard['foot_form'];
 if($tmpFetchBoard['foot_file']) include $tmpFetchBoard['foot_file'];
 ?>

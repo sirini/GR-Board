@@ -170,7 +170,7 @@ include $theme . '/lib/write_config.php';
 
 
 <div id="editableBox">
-	<textarea name="content" class="textarea" rows="15"><?php echo $content; ?></textarea>
+	<textarea name="content" class="textarea" rows="35"><?php echo $content; ?></textarea>
 </div>
 
 
@@ -205,6 +205,8 @@ var USE_EDITOR = false;
 <script src="<?php echo $grboard; ?>/tiny_mce/tiny_mce.js"></script>
 <script>
 tinyMCE.init({
+	language : "ko",
+
 	// General options
 	mode : "textareas",
 	theme : "advanced",

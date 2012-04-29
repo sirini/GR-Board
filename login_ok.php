@@ -23,17 +23,17 @@ if($enableBlock) {
   if($block['blocks'] >= $enableBlockNum) {
   $subject = "[알림] {$id}님의 로그인실패 허용횟수 초과.";
   $subject = $GR->escape($subject); //GPC아님 지우면 안 됨
-  $content = "$id($block[nickname]) 님의 로그인실패 허용횟수가 초과되어 로그인이 차단되었습니다.\n타인에 의한 고의적인 해킹시도라면 적절한 조취를 취해주세요.\n\n<a href=\"admin_member.php?memberID=$id\" onclick=\"window.open(this.href, \'_blank\'); return false\">[로그인 차단 해제하기]</a>";
+  $content = "$id($block[nickname]) 님의 로그인실패 허용횟수가 초과되어 로그인이 차단되었습니다.\n타인에 의한 고의적인 해킹시도라면 적절한 조치를 취해주세요.\n\n<a href=\"admin_member.php?memberID=$id\" onclick=\"window.open(this.href, \'_blank\'); return false\">[로그인 차단 해제하기]</a>";
   $content = $GR->escape($content); //GPC아님 지우면 안 됨
   $GR->query("insert into {$dbFIX}memo_save set member_key = '1', sender_key = '".$block['no']."', subject = '$subject', content = '$content', signdate = '".$GR->grTime()."', is_view = '0'");
-  $GR->error(''.$block['nickname'].'님의 로그인실패 허용횟수를 초과하셨으므로, 로그인할 수 없습니다.\n관리자에게 쪽지를 보냈으며, 제한해제를 원하신다면 관리자에게 문의하세요.', 1, 'login.php?boardID='.$boardID.'&fromPage='.urlencode($fromPage));
+  $GR->error('로그인실패 허용횟수를 초과하셨으므로, 로그인할 수 없습니다.\n관리자에게 쪽지를 보냈으며, 제한해제를 원하신다면 관리자에게 문의하세요.', 1, 'login.php?boardID='.$boardID.'&fromPage='.urlencode($fromPage));
   }
 }
 
 // 아이디와 비밀번호가 맞다면 인증해준다. @sirini
 if($id && $password) {
 
-	$member = $GR->getArray("select no, id from {$dbFIX}member_list where id = '$id' and password = password('$password')");
+	$member = $GR->getArray("select level, no, id from {$dbFIX}member_list where id = '$id' and password = password('$password')");
 	
 	// 비회원이 작성한 글일 때 @sirini
 	if(!$member['no']) {
@@ -56,6 +56,7 @@ if($id && $password) {
 	else {
 		$_SESSION['no'] = $member['no'];
 		$_SESSION['mId'] = $member['id'];
+		$_SESSION['level'] = $member['level'];
 		$_time = $GR->grTime();
 		$GR->query("update {$dbFIX}member_list set lastlogin = '$_time' where no = '".$member['no']."' limit 1");
 		$GR->query("insert into {$dbFIX}login_log set no = '', member_key = '".$member['no']."', signdate = '$_time', ip = '".$_SERVER['REMOTE_ADDR']."', ref = '$fromPage'");

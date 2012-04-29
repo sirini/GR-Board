@@ -88,11 +88,10 @@ include_once $theme.'/lib/list_lib.php';
 	<?php endif; ?>
 	
 	<td class="list">
-		&nbsp;&nbsp;
-		<?php echo $list['icon']; ?>				
+		<?php echo $list['icon']; ?>
 		<a href="<?php echo $list['link']; ?>&amp;page=<?php echo $page; ?>"><?php echo $list['subject']; ?></a>
-		
-		<?php if($list['comment_count']): ?>&nbsp; <span class="comment">(<?php echo $list['comment_count']; ?>)</span><?php endif; ?>
+
+		<?php if($list['comment_count']): ?>&nbsp; <span class="comment<?php echo $list['strongComment'];?>">(<?php echo $list['comment_count']; ?>)</span><?php endif; ?>
 		<?php if($list['hit'] > 300): ?> <img src="<?php echo $grboard.'/'.$theme; ?>/image/icon_hot_article.gif" alt="" /><?php endif; ?>
 	</td>
 

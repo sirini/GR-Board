@@ -36,7 +36,7 @@ if(!empty($boardId) && ($setup['head_file'] or $setup['head_form'])) {
 	if($setup['head_form']) {
 		$setup['head_form'] = str_replace('[theme]', $grboard.'/'.$theme, $setup['head_form']);
 		$setup['head_form'] = str_replace('</head>', '<style type="text/css"> @import url('.$grboard.'/admin/theme/join/'.$getJoinus['var'].'/style.css); </style></head>', $setup['head_form']);
-		echo stripslashes($setup['head_form']);
+		echo $setup['head_form'];
 	}
 
 // 상/하단 페이지가 없을 때 @sirini

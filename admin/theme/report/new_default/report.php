@@ -39,14 +39,14 @@ $getPost = @mysql_fetch_array(mysql_query('select subject, content from '.$dbFIX
 		    <thead>
 		      <tr class="subject">
 		        <th>게시물 제목</th>
-		        <td colspan="2"><strong><?php echo stripslashes($getPost['subject']); ?></strong></td>
+		        <td colspan="2"><strong><?php echo strip_tags($getPost['subject']); ?></strong></td>
 		      </tr>
 		    </thead>
 		    <tbody>
 		      <tr class="subject">
 		        <th>게시물 내용</th>
 		        <td class="content" colspan="2">
-		          <?php echo stripslashes(nl2br($getPost['content'])); ?>
+		          <?php echo strip_tags(nl2br($getPost['content'])); ?>
 		        </td>
 		      <tr>
 		      <tr class="subject">

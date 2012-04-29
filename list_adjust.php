@@ -373,7 +373,7 @@ include 'html_head.php';
 				for($g=0; $g<$countTmpArr; $g++){
 					$articleNo = $tempArray[$g];
 					$articleSubject = $GR->getArray("select subject from {$dbFIX}bbs_{$id} where no = '$articleNo'");
-					echo '<li>'.stripslashes($articleSubject[0]).'</li>';
+					echo '<li>'.strip_tags($articleSubject[0]).'</li>';
 				}
 			?>
 			</ul>
@@ -477,7 +477,7 @@ include 'html_head.php';
 				$categoryArray = @explode('|', $categories['category']);
 				$countCategory = @count($categoryArray);
 				for($ca=0; $ca<$countCategory; $ca++) { ?>
-					<option value="<?php echo stripslashes($categoryArray[$ca]); ?>"><?php echo stripslashes($categoryArray[$ca]); ?></option>
+					<option value="<?php echo strip_tags($categoryArray[$ca]); ?>"><?php echo strip_tags($categoryArray[$ca]); ?></option>
 				<?php } # for ?> 
 				<option value="category_delete">카테고리 제거</option>
 				</select>

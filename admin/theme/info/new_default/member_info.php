@@ -24,7 +24,7 @@
 			
 			<div class="tableListLine">
 				<div class="tableLeft">닉네임</div>
-				<div class="tableRight"><?php echo stripslashes($member['nickname']); ?> <a href="send_memo.php?target=<?php echo $member['no']; ?>" onfocus="this.blur()" title="<?php echo $member['realname']; ?> 님에게 쪽지를 보냅니다">[쪽지보내기]</a></div>
+				<div class="tableRight"><?php echo strip_tags($member['nickname']); ?> <a href="send_memo.php?target=<?php echo $member['no']; ?>" onfocus="this.blur()" title="<?php echo $member['realname']; ?> 님에게 쪽지를 보냅니다">[쪽지보내기]</a></div>
 				<div class="clear"></div>
 			</div>
 
@@ -84,7 +84,7 @@
 
 			<div class="tableListLine">
 				<div class="tableLeft">자기소개</div>
-				<div class="tableRight"><?php echo stripslashes(nl2br($member['self_info'])); ?></div>
+				<div class="tableRight"><?php echo nl2br($member['self_info']); ?></div>
 				<div class="clear"></div>
 			</div>
 

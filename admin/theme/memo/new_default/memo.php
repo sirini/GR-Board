@@ -53,7 +53,7 @@ $viewList = 10; # 한 화면에 (기본) 10 개씩 보기
 		    <thead>
 		      <tr class="subject">
 		        <th>제목</th>
-		        <td colspan="3"><?php echo stripslashes($view['subject']); ?></td>
+		        <td colspan="3"><?php echo strip_tags($view['subject']); ?></td>
 		      </tr>
 		      <tr class="sender_info">
           	<th class="sender">보낸사람</td>
@@ -112,8 +112,8 @@ $viewList = 10; # 한 화면에 (기본) 10 개씩 보기
   	          <?php if($memo['is_view']) { ?><img src="./admin/theme/memo/new_default/images/read.gif" align="읽음" title="읽음" /> <?php } else { ?><img src="./admin/theme/memo/new_default/images/read_no.gif" align="읽지않음" title="읽지않음" /><?php } ?>
   	        </td>
   	        <td class="sender"><?php echo $receiver['nickname']; ?></td>
-  	        <td class="title"><a href="view_memo.php?viewMemoNo=<?php echo $memo['no']; ?>&action=<?php echo $action; ?>" title="<?php echo stripslashes($memo['subject']); ?>" <?php if(!$memo['is_view']) echo 'class="no_read"'; ?>>
-						<?php echo stripslashes($memo['subject']); ?></a></td>
+  	        <td class="title"><a href="view_memo.php?viewMemoNo=<?php echo $memo['no']; ?>&action=<?php echo $action; ?>" title="<?php echo strip_tags($memo['subject']); ?>" <?php if(!$memo['is_view']) echo 'class="no_read"'; ?>>
+						<?php echo strip_tags($memo['subject']); ?></a></td>
   	        <td class="date"><?php echo date("Y.m.d", $memo['signdate']); ?></td>
   	        <td class="delete"><a href="#" onclick="deleteMemo(<?php echo $memo['no']; ?>);" title="이 쪽지를 삭제합니다"><img src="./admin/theme/memo/new_default/images/delete.png" align="삭제" /></a></td>
   	      </tr>
@@ -173,8 +173,8 @@ $viewList = 10; # 한 화면에 (기본) 10 개씩 보기
   	          <?php if($memo['is_view']) { ?><img src="./admin/theme/memo/new_default/images/read.gif" align="읽음" title="읽음" /> <?php } else { ?><img src="./admin/theme/memo/new_default/images/read_no.gif" align="읽지않음" title="읽지않음" /><?php } ?>
   	        </td>
   	        <td class="sender"><?php echo $getSender['nickname']; ?></td>
-  	        <td class="title"><a href="view_memo.php?viewMemoNo=<?php echo $memo['no']; ?>&action=<?php echo $action; ?>" title="<?php echo stripslashes($memo['subject']); ?>" <?php if(!$memo['is_view']) echo 'class="no_read"'; ?>>
-						<?php echo stripslashes($memo['subject']); ?></a></td>
+  	        <td class="title"><a href="view_memo.php?viewMemoNo=<?php echo $memo['no']; ?>&action=<?php echo $action; ?>" title="<?php echo strip_tags($memo['subject']); ?>" <?php if(!$memo['is_view']) echo 'class="no_read"'; ?>>
+						<?php echo strip_tags($memo['subject']); ?></a></td>
   	        <td class="date"><?php echo date("Y.m.d", $memo['signdate']); ?></td>
   	        <td class="delete"><a href="#" onclick="deleteMemo(<?php echo $memo['no']; ?>);" title="이 쪽지를 삭제합니다"><img src="./admin/theme/memo/new_default/images/delete.png" align="삭제" /></a></td>
   	      </tr>
@@ -235,8 +235,8 @@ $viewList = 10; # 한 화면에 (기본) 10 개씩 보기
   	          <?php if($memo['is_view']) { ?><img src="./admin/theme/memo/new_default/images/read.gif" align="읽음" title="읽음" /> <?php } else { ?><img src="./admin/theme/memo/new_default/images/read_no.gif" align="읽지않음" title="읽지않음" /><?php } ?>
   	        </td>
   	        <td class="sender"><?php echo $getSender['nickname']; ?></td>
-  	        <td class="title"><a href="view_memo.php?viewMemoNo=<?php echo $memo['no']; ?>&action=<?php echo $action; ?>" title="<?php echo stripslashes($memo['subject']); ?>" <?php if(!$memo['is_view']) echo 'class="no_read"'; ?>>
-						<?php echo stripslashes($memo['subject']); ?></a></td>
+  	        <td class="title"><a href="view_memo.php?viewMemoNo=<?php echo $memo['no']; ?>&action=<?php echo $action; ?>" title="<?php echo strip_tags($memo['subject']); ?>" <?php if(!$memo['is_view']) echo 'class="no_read"'; ?>>
+						<?php echo strip_tags($memo['subject']); ?></a></td>
   	        <td class="date"><?php echo date("Y.m.d", $memo['signdate']); ?></td>
   	        <td class="delete"><a href="#" onclick="deleteMemo(<?php echo $memo['no']; ?>);" title="이 쪽지를 삭제합니다"><img src="./admin/theme/memo/new_default/images/delete.png" align="삭제" /></a></td>
   	      </tr>
