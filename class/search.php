@@ -2,18 +2,10 @@
 class SEARCH
 {
 	// 검색하고 결과값 반환.
-	function totalSearch($searchText, $target, $fromRecord, $endRecord, $searchTarget, $sessionNo)
+	function totalSearch($searchText, $target, $fromRecord, $endRecord, $searchTarget)
 	{
 		global $dbFIX;
-		/*if(!ini_get('magic_quotes_gpc'))
-		{
-			$searchText = m.ysql_real_escape_string($searchText);
-			$target = m.ysql_real_escape_string($target);
-			$fromRecord = m.ysql_real_escape_string($fromRecord);
-			$endRecord = m.ysql_real_escape_string($endRecord);
-			$searchTarget = m.ysql_real_escape_string($searchText);
-			//이 변수들은 GPC로 넘어오는 것이므로 escape 해제함
-		}*/
+		//여기 변수들은 GPC로 넘어오는 것이므로 escape 안 함
 		$getMyInfo = @mysql_fetch_array(mysql_query('select level from '.$dbFIX.'member_list where no = '.$_SESSION['no']));
 		$ml = (!$getMyInfo['level']) ? 1 : $getMyInfo['level'];
 		$loopQue = @mysql_query("select id, enter_level, view_level from {$dbFIX}board_list");

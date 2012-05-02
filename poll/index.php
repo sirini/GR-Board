@@ -33,7 +33,7 @@ if($deleteComment) {
 if($_POST['content']) {
 	@extract($_POST);
 	$sql = "insert into {$dbFIX}poll_comment set no = '', poll_no = '$p', member_no = '".$_SESSION['no']."', ".
-		"comment = '".htmlspecialchars(mysql_real_escape_string(trim(stripslashes($content))))."', signdate = '".time()."'";
+		"comment = '".htmlspecialchars(trim(stripslashes($content)))."', signdate = '".time()."'";
 	@mysql_query($sql);
 	$GR->error('작성 완료 되었습니다.', 0, './?p='.$p);
 }

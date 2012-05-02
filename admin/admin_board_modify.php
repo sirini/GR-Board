@@ -226,7 +226,7 @@ if(!defined('__GRBOARD__')) exit();
 			<div class="tableListLine">
 				<div class="tableLeft" title="게시판 출력 이전에 출력할 내용을 적습니다. 상단파일 다음으로 출력됩니다." style="height: 150px">상단 내용</div>
 				<div class="tableRight">
-					<textarea name="modifyHeadForm" class="textarea" rows="7" cols="90"><?php echo str_replace('&', '&amp;', stripslashes($modifyData['head_form'])); ?></textarea>
+					<textarea name="modifyHeadForm" class="textarea" rows="7" cols="90"><?php echo str_replace('&', '&amp;', $modifyData['head_form']); ?></textarea>
 					<div><span class="sameBox" title="이 설정을 이 게시판이 속한 그룹 내에 소속된 게시판에 한해서 동일하게 적용합니다.">
 					<input type="checkbox" name="sameModifyHeadForm" value="1" /> 모두 변경</span></div>
 				</div>
@@ -236,7 +236,7 @@ if(!defined('__GRBOARD__')) exit();
 			<div class="tableListLine">
 				<div class="tableLeft" title="게시판을 부른 후 출력할 내용을 적습니다. 게시판 출력 이후에 바로 출력됩니다." style="height: 150px">하단 내용</div>
 				<div class="tableRight">
-					<textarea name="modifyFootForm" class="textarea" rows="7" cols="90"><?php echo str_replace('&', '&amp;', stripslashes($modifyData['foot_form'])); ?></textarea>
+					<textarea name="modifyFootForm" class="textarea" rows="7" cols="90"><?php echo str_replace('&', '&amp;', $modifyData['foot_form']); ?></textarea>
 					<div><span class="sameBox" title="이 설정을 이 게시판이 속한 그룹 내에 소속된 게시판에 한해서 동일하게 적용합니다.">
 					<input type="checkbox" name="sameModifyFootForm" value="1" /> 모두 변경</span></div>
 				</div>
@@ -263,7 +263,7 @@ if(!defined('__GRBOARD__')) exit();
 						$cateArr = @explode('|', $modifyData['category']);
 						$cateCnt = @count($cateArr);
 						for($c=0; $c<$cateCnt; $c++) {
-							echo '<li><span onclick="modifyCate(\''.$cateArr[$c].'\');" title="이 카테고리명을 수정하려면 이 곳을 클릭하세요.">'.stripslashes($cateArr[$c]).'</span> '.
+							echo '<li><span onclick="modifyCate(\''.$cateArr[$c].'\');" title="이 카테고리명을 수정하려면 이 곳을 클릭하세요.">'.strip_tags($cateArr[$c]).'</span> '.
 							'&nbsp;<span onclick="deleteCate(\''.$cateArr[$c].'\', \''.(($cateArr[1])?$cateArr[0]:'').'\');" title="이 곳을 클릭하시면 이 카테고리를 삭제합니다."><img src="image/admin/admin_poll_sub.gif" alt="삭제" /></span></li>';
 						}
 						echo '</ul>';

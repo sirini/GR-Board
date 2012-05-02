@@ -1,6 +1,6 @@
 <?php
 // 기본 클래스를 부른다 @sirini
-include 'class/common.php';
+include_once 'class/common.php';
 $GR = new COMMON;
 include 'config_member.php';
 
@@ -14,7 +14,7 @@ if($_GET['outMe'])
 	$title = 'GR Board Withdraw Page';
 	include 'html_head.php';
 	?>
-	<body>	
+	<body>
 	<div id="msgBox">
 	
 		<div id="inputPass" class="mvLoginBack">
@@ -59,21 +59,21 @@ if( $_POST['isSure'] == 'YES' ) {
 
 // 멤버정보가 수정되었다면 수정처리한다. @sirini
 if($_POST['modifyMemberInfo']) {
-	$nickname2 = $GR->escape(htmlspecialchars(trim(stripslashes($_POST['nickname']))));
-	$email2 = $GR->escape(htmlspecialchars(trim(stripslashes($_POST['email']))));
+	$nickname = $GR->escape(htmlspecialchars(trim($GR->unescape($_POST['nickname']))));
+	$email = $GR->escape(htmlspecialchars(trim($GR->unescape($_POST['email']))));
 	$getMemberInfo = $GR->getArray('select nickname,email from '.$dbFIX.'member_list where no = \''.$_SESSION['no'].'\'');
 	
 	// 닉네임은 중복되면 안된다! @sirini
-	if($nickname2 != $getMemberInfo['nickname'])
+	if($nickname != $getMemberInfo['nickname'])
 	{
-		$getExistNick = $GR->getArray('select no from '.$dbFIX.'member_list where nickname = \''.$nickname2.'\'');
+		$getExistNick = $GR->getArray('select no from '.$dbFIX.'member_list where nickname = \''.$nickname.'\'');
 		if($getExistNick['no']) $GR->error('닉네임이 중복됩니다.', 0, 'HISTORY_BACK');
 	}
 	
 	// 이메일은 중복되면 안된다! @sirini
-	if($email2 != $getMemberInfo['email'])
+	if($email != $getMemberInfo['email'])
 	{
-		$getExistEmail = $GR->getArray('select no from '.$dbFIX.'member_list where email = \''.$email2.'\'');
+		$getExistEmail = $GR->getArray('select no from '.$dbFIX.'member_list where email = \''.$email.'\'');
 		if($getExistEmail['no']) $GR->error('이메일 주소가 이미 등록되어 있습니다.', 0, 'HISTORY_BACK');
 	}
 	
@@ -206,11 +206,10 @@ if($_POST['modifyMemberInfo']) {
 		} else $saveFile3 = $getOldFile['icon'];
 	}
 
-	$nickname = $GR->escape(htmlspecialchars(trim($_POST['nickname'])));
-	$realname = $GR->escape(htmlspecialchars(trim($_POST['realname'])));
-	$email = $GR->escape(htmlspecialchars(trim($_POST['email'])));
-	$homepage = $GR->escape(htmlspecialchars(trim($_POST['homepage'])));
-	$selfInfo = strip_tags($GR->escape(trim($_POST['self_info'])), '<img><p><strong><br>');
+	$realname = $GR->escape(htmlspecialchars(trim($GR->unescape($_POST['realname']))));
+	$homepage = $GR->escape(htmlspecialchars(trim($GR->unescape($_POST['homepage']))));
+//	$selfInfo = $GR->escape(strip_tags(nl2br(trim($GR->unescape($_POST['self_info']))),'<img><p><strong><br>'));
+        $selfInfo = $GR->escape(nl2br(htmlspecialchars(trim($GR->unescape($_POST['self_info']))))); //수정 필요!!! pico
 	if($_POST['password']) $password = trim($_POST['password']);
 
 	// 홈페이지에 http:// 빠져 있으면 넣어주기 @sirini
@@ -291,12 +290,13 @@ if(!empty($boardId) && ($setup['head_file'] or $setup['head_form'])) {
 	if($setup['head_form']) {
 		$setup['head_form'] = str_replace('[theme]', $grboard.'/'.$theme, $setup['head_form']);
 		$setup['head_form'] = str_replace('</head>', '<style type="text/css"> @import  url('.$grboard.'/admin/theme/info/'.$getInformation['var'].'/style.css); </style></head>', $setup['head_form']);
-		echo stripslashes($setup['head_form']);
+		echo $setup['head_form'];
 	}
 
 } else {
 	$title = 'GR Board My Information Page';
 	include 'html_head.php';
+	echo '<script type="text/javascript" src="js/info_check.js"></script><body>';
 }
 
 // 회원 가입 테마 부르기 @sirini
@@ -304,7 +304,7 @@ include 'admin/theme/info/'.$getInformation['var'].'/info.php';
 
 // 하단 설정 @sirini
 if($boardId) {
-	if($setup['foot_form']) echo stripslashes($setup['foot_form']);
+	if($setup['foot_form']) echo $setup['foot_form'];
 	if($setup['foot_file']) include $setup['foot_file'];
 }
 else { ?></body></html><?php } ?>

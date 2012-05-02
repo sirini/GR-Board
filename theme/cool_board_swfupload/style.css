@@ -48,11 +48,12 @@
 #GRBOARD td.no { font-size: 10px; text-align: center; color: #999; border-bottom: #eee 1px solid; }
 #GRBOARD td.category { text-align: center; border-bottom: #eee 1px solid; }
 #GRBOARD td.category a { font-size: 11px; font-family: Dotum, 돋움, sans-serif; color: #3f6b6b; }
-#GRBOARD td span.comment { font-size:10px; font-weight: bold; color: #999; }
 #GRBOARD td.name { text-align: center; border-bottom: #eee 1px solid; }
 #GRBOARD td.name span { color: #777; cursor: pointer; }
 #GRBOARD td.list { text-align: left; border-bottom: #eee 1px solid; }
 #GRBOARD td.list span { color: #777; cursor: pointer; }
+#GRBOARD td span.comment { font-size:10px; font-weight: bold; color: #00C0FF; }
+#GRBOARD td span.comment_em { font-size:10px; font-weight: bold; color: #0055FF; }
 #GRBOARD td.date { font-size: 11px; text-align: center; border-bottom: #eee 1px solid; color: #999; }
 
 /* Page link */

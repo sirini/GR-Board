@@ -13,8 +13,8 @@ if($_SESSION['no']) {
 	$GR->dbConn();
 	$getLastData = $GR->getArray('select * from '.$dbFIX.'auto_save where member_key = '.$_SESSION['no']);
 	$time = $getLastData['signdate'];
-	$subject = stripslashes($getLastData['subject']);
-	$content = stripslashes($getLastData['content']);
+	$subject = $getLastData['subject'];
+	$content = $getLastData['content'];
 } else {
 	$msg = '사용중이신 브라우저에서 1시간 이내에 자동 저장된 최근글';
 	$time = $_COOKIE['grDate'];

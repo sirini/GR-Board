@@ -85,6 +85,7 @@ class COMMON {
 	function fetch($que) { return @mysql_fetch_array($que); }
 	function assoc($que) { return @mysql_fetch_assoc($que); }
 	function escape($str) { return @mysql_real_escape_string($str); }
+	function unescape($str) { return current(@mysql_fetch_row(mysql_query("select '{$str}' as text"))); }
 	function getArray($sql) { return @mysql_fetch_array(mysql_query($sql)); }
 	function getInsertId() { return @mysql_insert_id(); }
 	function getNumRows($que) { return @mysql_num_rows($que); }
