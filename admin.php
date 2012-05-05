@@ -224,7 +224,7 @@ include 'admin/admin_left_menu.php';
 						<?php
 						$getTA = $GR->query('select * from '.$dbFIX.'total_article order by no desc limit 20');
 						while($ta = $GR->fetch($getTA)) { ?>
-						<li><a href="board.php?id=<?php echo $ta['id']; ?>&amp;articleNo=<?php echo $ta['article_num']; ?>"><?php echo stripslashes($ta['subject']); ?></a> 
+						<li><a href="board.php?id=<?php echo $ta['id']; ?>&amp;articleNo=<?php echo $ta['article_num']; ?>"><?php echo strip_tags($ta['subject']); ?></a> 
 						&nbsp; <span class="smallEng" title="<?php echo date('Y/m/d H:i:s', $ta['signdate']); ?>">(<?php echo date('m.d', $ta['signdate']); ?>)</span></li>
 						<?php } ?>
 					</ul>
@@ -236,7 +236,7 @@ include 'admin/admin_left_menu.php';
 						<?php
 						$getTC = $GR->query('select * from '.$dbFIX.'total_comment order by no desc limit 20');
 						while($tc = $GR->fetch($getTC)) { ?>
-						<li><a href="board.php?id=<?php echo $tc['id']; ?>&amp;articleNo=<?php echo $tc['article_num']; ?>"><?php echo stripslashes($tc['subject']); ?></a> 
+						<li><a href="board.php?id=<?php echo $tc['id']; ?>&amp;articleNo=<?php echo $tc['article_num']; ?>"><?php echo strip_tags($tc['subject']); ?></a> 
 						&nbsp; <span class="smallEng" title="<?php echo date('Y/m/d H:i:s', $tc['signdate']); ?>">(<?php echo date('m.d', $tc['signdate']); ?>)</span></li>
 						<?php } ?>
 					</ul>
@@ -398,7 +398,7 @@ include 'admin/admin_left_menu.php';
 					?>
 				<div class="tableListLine">
 					<div class="tableLeft"><?php echo date("Y.m.d", $error['msg_time']); ?></div>
-					<div class="tableRight"><?php echo stripslashes($error['error_msg']); ?></div>
+					<div class="tableRight"><?php echo strip_tags($error['error_msg']); ?></div>
 					<div class="clear"></div>
 				</div>
 					<?php
@@ -432,7 +432,7 @@ include 'admin/admin_left_menu.php';
 				while($loginlog = $GR->fetch($getLoginLog))
 				{
 					$m = $GR->getArray('select id, level, point, nickname, nametag, icon, lastlogin from '.$dbFIX.'member_list where no = '.$loginlog['member_key']);
-					$name = stripslashes($m['nickname']);
+					$name = strip_tags($m['nickname']);
 					if($m['nametag']) $name = '<img src="'.$m['nametag'].'" alt="'.$m['nickname'].'" />';
 					if($m['icon']) $name = '<img src="'.$m['icon'].'" alt="" /> '.$name;
 					echo '<li title="IP: '.$loginlog['ip'].'">'.$loopLogin.'. '.$name.' <span class="caution">(level: '.$m['level'].' / point: '.$m['point'].' / time: '.date('m.d H:i:s', $loginlog['signdate']).')</span></li>'; 

@@ -124,7 +124,7 @@ include 'admin/admin_left_menu.php';
 			?>
 			<tr>
 				<td>&nbsp;&nbsp; <?php if($data['id']) echo '<a href="board.php?id='.$data['id'].'" title="이 게시판에서 설문이 등록되었습니다.">['.$data['id'].']</a> '; ?>
-				<a href="admin_poll.php?pollNum=<?php echo $data['no']; ?>" title="이 설문을 수정합니다."><?php echo stripslashes($data['subject']); ?></a></td>
+				<a href="admin_poll.php?pollNum=<?php echo $data['no']; ?>" title="이 설문을 수정합니다."><?php echo strip_tags($data['subject']); ?></a></td>
 				<td class="boardList"><?php echo $getTotalVote[0]; ?></td>
 				<td class="boardList"><?php echo $getTotalComment[0]; ?></td>
 				<td class="boardList"><?php echo date('Y.m.d', $data['signdate']); ?></td>

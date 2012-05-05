@@ -12,7 +12,7 @@ function showImg($filename, $f=1)
 	$path = $getPdsSave['file_route'.$f];
 	$ft = end(explode('.', $filename));
 	if($ft == 'jpg' || $ft == 'gif' || $ft == 'png' || $ft == 'bmp') {
-		return '<span><a href="data/'.$id.'/'.$filename.'" onclick="return hs.expand(this)"><img src="'.$path.'" alt="그림보기" /></a></span>';
+		return '<span><a href="data/'.$id.'/'.$filename.'" onclick="return hs.expand(this)"><img src="'.$path.'" width="50px" height="50px" alt="그림보기" /></a></span>';
 	}
 	else return '[파일받기]';
 }
@@ -39,7 +39,7 @@ function showMemberInfo($mem=0)
 	$m = $GR->getArray("select photo, self_info from {$dbFIX}member_list where no = '$mem'");
 	if($m['photo']) $result .= '<div id="myPhoto"><img src="'.$m['photo'].'" alt="사진" title="" /></div>';
 	else $result .= '<div id="myPhoto">&nbsp;</div>';
-	if($m['self_info']) $result .= '<div id="myComment">'.stripslashes($m['self_info']).'</div>';
+	if($m['self_info']) $result .= '<div id="myComment">'.$m['self_info'].'</div>';
 	else $result .= '<div id="myComment">소개글이 없습니다.</div>';
 	$result .= '<div class="clear"></div></div>';
 	return $result;
@@ -96,9 +96,9 @@ function setViewData($comment)
 	}
 
 	// 변수 처리
-	$comment['name'] = stripslashes($comment['name']);
-	$comment['subject'] = stripslashes($comment['subject']);
-	$comment['content'] = stripslashes(nl2br($comment['content']));
+	$comment['name'] = strip_tags($comment['name']);
+	$comment['subject'] = htmlspecialchars($comment['subject']);
+	$comment['content'] = nl2br($comment['content']);
 	$comment['signdate'] = date("Y.m.d H:i:s", $comment['signdate']);
 	$comment['homepage'] = htmlspecialchars($comment['homepage']);
 	$comment['email'] = htmlspecialchars($comment['email']);

@@ -34,11 +34,11 @@ class BLOG
 				$rss['content'] = '관리자에 의해 블라인드 처리 된 글입니다.';
 			}
 			
-			$resultString .= '<item><title>'.htmlspecialchars(stripslashes($rss['subject'])).'</title>'.
+			$resultString .= '<item><title>'.htmlspecialchars($rss['subject']).'</title>'.
 			'<link>http://'.$_SERVER['HTTP_HOST'].$path.'/board.php?id='.$id.'&amp;articleNo='.$rss['no'].'</link>';
 			
 			if($isRSSOpen['view_level'] < 2) {
-				$resultString .= '<description>'.stripslashes(htmlspecialchars(nl2br($rss['content']))).'</description>';
+				$resultString .= '<description>'.nl2br($rss['content']).'</description>';
 			} else {
 				$resultString .= '<description>볼 수 있는 권한이 없습니다.</description>';	
 			}
@@ -93,15 +93,15 @@ class BLOG
 					$getPostThumb['content'] = '관리자에 의해 블라인드 처리 된 글입니다.';
 				}
 			}
-			$resultString .= '<item><title>'.htmlspecialchars(stripslashes($rss['subject'])).'</title>'.
+			$resultString .= '<item><title>'.htmlspecialchars($rss['subject']).'</title>'.
 				'<link>http://'.$_SERVER['HTTP_HOST'].$path.'/board.php?id='.$rss['id'].'&amp;articleNo='.$rss['article_num'].'</link>';
 							
 			if($isRSSOpen['view_level'] < 2) {
-				$resultString .= '<description>'.htmlspecialchars(stripslashes(nl2br($getPostThumb['content']))).'</description>';
+				$resultString .= '<description>'.htmlspecialchars(nl2br($getPostThumb['content'])).'</description>';
 			} else {
 				$resultString .= '<description>볼 수 있는 권한이 없습니다.</description>';
 			}
-			$resultString .= '<author>'.htmlspecialchars(stripslashes($getPostThumb['name'])).'</author><pubDate>'.date('r', $rss['signdate']).'</pubDate></item>';
+			$resultString .= '<author>'.htmlspecialchars($getPostThumb['name']).'</author><pubDate>'.date('r', $rss['signdate']).'</pubDate></item>';
 			$loopCount++;
 		}
 		$resultString .= '</channel></rss>';
@@ -144,9 +144,9 @@ class BLOG
 				$rss['subject'] = '비밀글 입니다.';
 				$rss['content'] = '비밀글 입니다.';	
 			}		
-			$resultString .= '<item><title>'.htmlspecialchars(stripslashes($rss['subject'])).'</title>'.
+			$resultString .= '<item><title>'.htmlspecialchars($rss['subject']).'</title>'.
 			'<link>http://'.$_SERVER['HTTP_HOST'].$path.'/board.php?id='.$id.'&amp;articleNo='.$rss['board_no'].'</link>'.
-			'<description>'.stripslashes(htmlspecialchars(nl2br($rss['content']))).'</description>'.
+			'<description>'.htmlspecialchars(nl2br($rss['content'])).'</description>'.
 			'<author>'.$rss['name'].'</author>'.'<pubDate>'.date('r', $rss['signdate']).'</pubDate></item>';
 		}
 		$resultString .= '</channel></rss>';

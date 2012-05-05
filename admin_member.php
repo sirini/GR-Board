@@ -294,7 +294,7 @@ include 'admin/admin_left_menu.php';
 			<div class="tableListLine">
 				<div class="tableLeft" title="자기소개는 250자 이하로 작성되어야 하며, HTML 태그가 허용되지 않습니다." style="height:70px;">자기소개</div>
 				<div class="tableRight">
-					<textarea name="modifySelfInfo" class="textarea" rows="3" cols="90"><?php echo stripslashes(nl2br($memberData['self_info'])); ?></textarea>
+					<textarea name="modifySelfInfo" class="textarea" rows="3" cols="90"><?php echo strip_tags(nl2br($memberData['self_info'])); ?></textarea>
 				</div>
 				<div class="clear"></div>
 			</div>

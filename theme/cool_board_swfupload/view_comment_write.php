@@ -104,7 +104,7 @@
 		</div>
 		
 		<div style="width: 19%; float: left">
-			<input type="image" src="<?php echo $grboard.'/'.$theme; ?>/image/comment_write_ok.gif" title="댓글을 작성완료 합니다" />
+			<input type="image" src="<?php echo $grboard.'/'.$theme; ?>/image/comment_write_ok.gif" onmouseover="this.src='<?php echo $grboard.'/'.$theme; ?>/image/comment_write_ok_rollover.gif'" onmouseout="this.src='<?php echo $grboard.'/'.$theme; ?>/image/comment_write_ok.gif'" title="댓글을 작성완료 합니다" />
 		</div>
 		
 	</td>
@@ -120,9 +120,26 @@
 <script src="<?php echo $grboard; ?>/tiny_mce/tiny_mce.js"></script>
 <script>
 	tinyMCE.init({
-		mode : "textareas",
-		content_css : "<?php echo $grboard.'/'.$theme; ?>/edit.css",
-		theme : "simple"
+	language: "ko",
+	mode : "textareas",
+	content_css : "<?php echo $grboard.'/'.$theme; ?>/edit.css",
+	theme : "advanced",
+	plugins : "emotions,inlinepopups,media",
+	theme_advanced_buttons1 : "bold,italic,underline,strikethrough,forecolor,|,emotions,image,media,bullist,numlist,link,code",
+	theme_advanced_buttons2 : "",
+	theme_advanced_buttons3 : "",
+	theme_advanced_buttons4 : "",
+	theme_advanced_toolbar_location : "top",
+	theme_advanced_toolbar_align : "left",
+	theme_advanced_statusbar_location : "bottom",
+	media_use_script : true,
+	paste_strip_class_attributes : "all",
+	paste_remove_spans : false,
+	paste_remove_styles : false,
+	forced_root_block : false,
+	force_br_newlines : true,
+	force_p_newlines : false,
+	convert_urls : false
 	});
 </script>
 <?php endif; ?>

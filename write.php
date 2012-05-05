@@ -113,8 +113,8 @@ if($mode && $articleNo) {
 		"file_route7, file_route8, file_route9, file_route10 from {$dbFIX}pds_save where id = '$id' and article_num = '$articleNo'");
 	$oldFile = $GR->fetch($getFiles);	
 	
-	$subject = stripslashes(htmlspecialchars($modify['subject']));
-	$content = stripslashes($modify['content']);	
+	$subject = htmlspecialchars($modify['subject']);
+	$content = $modify['content'];	
 	$content = str_replace('&amp;nbsp;', ' ', $content);
 
 // 신규 글일 경우 카테고리 처리 @sirini
@@ -142,12 +142,12 @@ if($tmpFetchBoard['category']) $isCategory = 1; else $isCategory = 0;
 
 // 상단에 불러올 파일과 내용을 처리한다. @sirini
 if(file_exists($tmpFetchBoard['head_file'])) include $tmpFetchBoard['head_file'];
-echo str_replace('[theme]', $grboard.'/theme/'.$tmpFetchBoard['theme'], stripslashes($tmpFetchBoard['head_form']));
+echo str_replace('[theme]', $grboard.'/theme/'.$tmpFetchBoard['theme'], $tmpFetchBoard['head_form']);
 
 // 테마 불러오기 @sirini
 include $theme.'/write.php';
 
 // 하단에 불러올 파일과 내용을 처리한다. @sirini
-echo stripslashes($tmpFetchBoard['foot_form']);
+echo $tmpFetchBoard['foot_form'];
 if(file_exists($tmpFetchBoard['foot_file'])) include $tmpFetchBoard['foot_file'];
 ?>

@@ -44,14 +44,14 @@ if($_POST['is_secret']) $isSecret = $_POST['is_secret'];
 if($_POST['is_notice']) $isNotice = $_POST['is_notice'];
 if($_POST['is_grcode']) $isGrcode = $_POST['is_grcode'];
 if($_POST['password']) $password = $_POST['password'];
-if($_POST['name']) $name = $GR->escape(htmlspecialchars(trim(stripslashes($_POST['name']))));
+if($_POST['name']) $name = $GR->escape(htmlspecialchars(trim($GR->unescape($_POST['name']))));
 if($_POST['category']) $category = $_POST['category'];
 if($_POST['subject']) $subject = $_POST['subject'];
 if($_POST['content']) $content = $_POST['content'];
 if($_POST['email']) $email = $_POST['email'];
-if($_POST['homepage']) $homepage = $GR->escape(htmlspecialchars(trim($_POST['homepage'])));
-if($_POST['link1']) $link1 = $GR->escape(htmlspecialchars(trim($_POST['link1'])));
-if($_POST['link2']) $link2 = $GR->escape(htmlspecialchars(trim($_POST['link2'])));
+if($_POST['homepage']) $homepage = htmlspecialchars(trim($_POST['homepage']));
+if($_POST['link1']) $link1 = htmlspecialchars(trim($_POST['link1']));
+if($_POST['link2']) $link2 = htmlspecialchars(trim($_POST['link2']));
 if($_POST['is_alert']) $isAlert = $_POST['is_alert'];
 if($_POST['is_timebomb']) $isTimeBomb = $_POST['is_timebomb'];
 if($_POST['bombTime']) $bombTime = $_POST['bombTime'];
@@ -160,10 +160,10 @@ if($isAdmin || $isMaster) {
 	$content = str_replace("\t", '&nbsp;&nbsp;&nbsp;&nbsp;', $content);
 } else {
 	$allowTags = $GR->getArray('select is_html from '.$dbFIX.'board_list where id = \''.$id.'\'');
-	$subject = $GR->escape(trim(htmlspecialchars(stripslashes($subject))));
-	$content = trim(stripslashes($content));
+	$subject = $GR->escape(trim(htmlspecialchars($GR->unescape($subject))));
+	$content = trim($GR->unescape($content));
 	$content = str_replace("\t", '&nbsp;&nbsp;&nbsp;&nbsp;', $content);
-	$content = $GR->escape(strip_tags2($content, $allowTags[0])); //윗윗줄에서 stripslashes했으므로 다시 MRES적용
+	$content = $GR->escape(strip_tags2($content, $allowTags['is_html'])); //윗윗줄에서 unescape했으므로 다시 escape.
 	$filterText = @file_get_contents('filter.txt');
 	$filterArray = explode(',', $filterText);
 	$filterNum = count($filterArray);

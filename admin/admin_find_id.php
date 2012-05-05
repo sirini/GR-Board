@@ -17,7 +17,6 @@ $GR->dbConn();
 // 결과값 주기 @sirini
 if($_POST['id'])
 {
-	$id = $GR->escape($_POST['id']);
 	$xml  = '<?xml version="1.0" encoding="utf-8"?><lists>';
 	$sql = 'select id, nickname, realname from '.$dbFIX.'member_list where id'." like '%{$id}%' limit 10";
 	$test = $GR->getArray($sql);
@@ -28,7 +27,7 @@ if($_POST['id'])
 
 	$result = $GR->query($sql);
 	while($list = $GR->fetch($result)) {
-		$xml .= '<ids name="'.stripslashes($list['nickname']).'" real="'.stripslashes($list['realname']).'">'.$list['id'].'</ids>';
+		$xml .= '<ids name="'.strip_tags($list['nickname']).'" real="'.strip_tags($list['realname']).'">'.$list['id'].'</ids>';
 	}
 	$xml .= '</lists>';
 	echo $xml;
