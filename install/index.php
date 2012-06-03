@@ -56,7 +56,7 @@ include $preRoute . 'html_head.php';
 				<div style="padding: 5px">
 				<?php
 				// 퍼미션이 조절되지 않았다면 경고처리
-				if(!is_writable('.')) { ?>
+				if(!is_writable('../')) { ?>
 				<span class="badStatus">※ 경고 : 퍼미션이 맞지 않습니다. GR Board 폴더의 퍼미션을 707 혹은 777 로 변경하세요!</span><br />
 				<?php }
 				// 이미 설치된 적이 있다면 경고처리

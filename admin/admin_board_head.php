@@ -148,7 +148,7 @@ if(array_key_exists('isAddBoard', $_POST) && $_POST['isAddBoard']) {
 		key signdate(signdate),
 		key good(good),
 		key bad(bad),
-		key is_notice(is_notice)) TYPE=MyISAM CHARSET=utf8;";
+		key is_notice(is_notice))";
 	$GR->query($sqlAddBoard);
 
 	$sqlAddComment = "create table {$dbFIX}comment_{$addBoardId} (
@@ -175,7 +175,7 @@ if(array_key_exists('isAddBoard', $_POST) && $_POST['isAddBoard']) {
 		key family_no(family_no),
 		key thread(thread),
 		key member_key(member_key),
-		key order_key(order_key)) TYPE=MyISAM CHARSET=utf8;";
+		key order_key(order_key))";
 	$GR->query($sqlAddComment);
 
 	$makeTime = $GR->grTime();
