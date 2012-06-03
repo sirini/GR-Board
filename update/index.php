@@ -85,7 +85,7 @@ $que[] = "alter table `{$dbFIX}board_list` add down_level tinyint(4) not null de
 $que[] = "alter table `{$dbFIX}board_list` add down_point tinyint(4) not null default '0'";
 
 // after v1.8.5 r2
-$que[] = "alter table `{dbFIX}memo_save` add index ( `sender_key` )";
+$que[] = "alter table `{$dbFIX}memo_save` add index ( `sender_key` )";
 
 // after v1.8.5 r4
 $que[] = "alter table `{$dbFIX}board_list` add is_history tinyint(1) not null default '1'";
@@ -103,6 +103,9 @@ $bbsList192 = @mysql_query('select id from '.$dbFIX.'board_list');
 while($list192 = @mysql_fetch_array($bbsList192)) {
 	$que[] = 'alter table '.$dbFIX.'bbs_'.$list192['id'].' drop trackback';
 }
+
+// after v1.9.3 R2
+$que[] = "ALTER TABLE `{$dbFIX}member_list` CHANGE  `password`  `password` CHAR( 32 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT ''";
 
 // run query
 for($i=0; $i<count($que); $i++) @mysql_query($que[$i]);

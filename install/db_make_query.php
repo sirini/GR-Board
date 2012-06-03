@@ -45,7 +45,7 @@ $que[] = "create table {$dbFIX}board_list (
 $que[] = "create table {$dbFIX}member_list (
 	no int(11) not null auto_increment,
 	id varchar(50) not null default '',
-	password varchar(200) not null default '',
+	password char(32) not null default '',
 	nickname varchar(20) not null default '',
 	realname varchar(15) not null default '',
 	email varchar(255) not null default '',

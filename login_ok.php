@@ -33,37 +33,48 @@ if($enableBlock) {
 // 아이디와 비밀번호가 맞다면 인증해준다. @sirini
 if($id && $password) {
 
-	$member = $GR->getArray("select level, no, id from {$dbFIX}member_list where id = '$id' and password = password('$password')");
+	$member = $GR->getArray("select level, no, id from {$dbFIX}member_list where id = '$id' and password = md5('$password')");
 	
-	// 비회원이 작성한 글일 때 @sirini
+	// 로그인이 되지 않을 때 @sirini
 	if(!$member['no']) {
-		if($enableBlock) {
-			$block['blocks']++;
-			$GR->query("update {$dbFIX}member_list set blocks = '".$block['blocks']."' where id = '$id'");
-	   
-			// 아이디가 존재하는지 확인 @sirini
-			if($id == $block['id']) { 
-				$GR->error('비밀번호가 올바르지 않습니다. ('.$block['blocks'].'회 실패)', 0, 'login.php?boardID='.$boardID.'&fromPage='.urlencode($fromPage));
+		
+		// 먼저 md5() 이전 세대일지 모르니 확인해본다
+		include 'class/database.php';
+		$DB = new DATABASE;
+		$member = $GR->getArray("select level, no, id from {$dbFIX}member_list where id = '$id' and password = '" . $DB->old_password($password) . "'");
+		
+		// 비밀번호가 md5 형태로 변환되지 않았으므로 먼저 그 처리를 해준다
+		if($member['no']) {
+			$GR->query("update {$dbFIX}member_list set password = '" . md5($password) . "' where no = '".$member['no']."' limit 1");
+			
+		// 그냥 비밀번호가 틀린 것일 경우 아래 처리
+		} else {
+			if($enableBlock) {
+				$block['blocks']++;
+				$GR->query("update {$dbFIX}member_list set blocks = '".$block['blocks']."' where id = '$id'");
+		   
+				// 아이디가 존재하는지 확인 @sirini
+				if($id == $block['id']) { 
+					$GR->error('비밀번호가 올바르지 않습니다. ('.$block['blocks'].'회 실패)', 0, 'login.php?boardID='.$boardID.'&fromPage='.urlencode($fromPage));
+				} else { 
+					$GR->error('아이디 혹은 비밀번호가 올바르지 않습니다.', 0, 'login.php?boardID='.$boardID.'&fromPage='.urlencode($fromPage)); 
+				}
 			} else { 
 				$GR->error('아이디 혹은 비밀번호가 올바르지 않습니다.', 0, 'login.php?boardID='.$boardID.'&fromPage='.urlencode($fromPage)); 
-			}
-		} else { 
-			$GR->error('아이디 혹은 비밀번호가 올바르지 않습니다.', 0, 'login.php?boardID='.$boardID.'&fromPage='.urlencode($fromPage)); 
+			}			
 		}
 	}
 
 	// 멤버가 작성한 글일 때 @sirini
-	else {
-		$_SESSION['no'] = $member['no'];
-		$_SESSION['mId'] = $member['id'];
-		$_SESSION['level'] = $member['level'];
-		$_time = $GR->grTime();
-		$GR->query("update {$dbFIX}member_list set lastlogin = '$_time' where no = '".$member['no']."' limit 1");
-		$GR->query("insert into {$dbFIX}login_log set no = '', member_key = '".$member['no']."', signdate = '$_time', ip = '".$_SERVER['REMOTE_ADDR']."', ref = '$fromPage'");
+	$_SESSION['no'] = $member['no'];
+	$_SESSION['mId'] = $member['id'];
+	$_SESSION['level'] = $member['level'];
+	$_time = $GR->grTime();
+	$GR->query("update {$dbFIX}member_list set lastlogin = '$_time' where no = '".$member['no']."' limit 1");
+	$GR->query("insert into {$dbFIX}login_log set no = '', member_key = '".$member['no']."', signdate = '$_time', ip = '".$_SERVER['REMOTE_ADDR']."', ref = '$fromPage'");
 		
-		// 로그인 실패 횟수를 초기화한다. @sirini
-		$GR->query("update {$dbFIX}member_list set blocks = '0' where no = '".$member['no']."'");
-	}
+	// 로그인 실패 횟수를 초기화한다. @sirini
+	$GR->query("update {$dbFIX}member_list set blocks = '0' where no = '".$member['no']."'");
 }
 
 // 자동 로그인 체크 시 처리 @sirini

@@ -115,5 +115,32 @@ class DATABASE
 		if(preg_match('/msie/i', $_SERVER['HTTP_USER_AGENT'])) header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 		header('Pragma: public');
 	}
+	
+	// MySQL 41바이트 암호화를 php로 구현 php.net
+	function password($password,$option=''){
+    	if($password===null)return null;
+    	if(strlen($password)==0)return '';
+    	$r=sha1(sha1($password,true));
+    	if($option) return $r; else return '*'.strtoupper($r);
+	}
+	
+	// MySQL 16바이트 암호화를 php로 구현 phpschool.com
+	function old_password($password) {
+    	$nr = 1345345333;
+    	$add = 7;
+    	$nr2 = 0x12345671;
+    	$size = strlen($password);
+    	for($i=0;$i<$size;$i++) {
+    		if($password[$i] == ' ' || $password[$i] == '\t') continue; /* skipp space in password */
+    		$tmp = ord($password[$i]);
+    		$nr ^= ((($nr & 63)+$add)*$tmp) + ($nr << 8);
+    		$nr2 += ($nr2 << 8) ^ $nr;
+    		$add += $tmp;
+    		}
+    	$result1=$nr & ((1 << 31) -1); /* Don't use sign bit (str2int) */
+    	$result2=$nr2 & ((1 << 31) -1);
+    	$result = sprintf("%08x%08x",$result1,$result2);
+    	return $result;
+    }
 }
 ?>
