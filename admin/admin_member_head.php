@@ -88,7 +88,7 @@ if(array_key_exists('isModifyMember', $_POST) && $_POST['isModifyMember']) {
 		$filetmpname1 = $_FILES['photo']['tmp_name'];
 
 		if($filesize1 > 0) {
-			if(!preg_match('|\.png|\.jpg|\.gif|i', $filename1)) {
+			if(!preg_match('/\.(png|jpg|gif)$/i', $filename1)) {
 				$GR->error('사진이 아닙니다. 지원 확장자 : .png, .jpg, .gif', 0, 'admin_member.php');
 			}
 
@@ -125,7 +125,7 @@ if(array_key_exists('isModifyMember', $_POST) && $_POST['isModifyMember']) {
 		$filetmpname2 = $_FILES['nametag']['tmp_name'];
 
 		if($filesize2 > 0) {
-			if(!preg_match('|\.png|\.jpg|\.gif|i', $filename2)) {
+			if(!preg_match('/\.(png|jpg|gif)$/i', $filename2)) {
 				$GR->error('그림이 아닙니다. 지원 확장자 : .png, .jpg, .gif', 0, 'admin_member.php');
 			}
 
@@ -163,7 +163,7 @@ if(array_key_exists('isModifyMember', $_POST) && $_POST['isModifyMember']) {
 		$filetmpname3 = $_FILES['icon']['tmp_name'];
 
 		if($filesize3 > 0) {
-			if(!preg_match('|\.png|\.jpg|\.gif|i', $filename3)) {
+			if(!preg_match('/\.(png|jpg|gif)$/i', $filename3)) {
 				$GR->error('그림이 아닙니다. 지원 확장자 : .png, .jpg, .gif', 0, 'admin_member.php');
 			}
 
