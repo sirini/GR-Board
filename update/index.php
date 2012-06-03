@@ -169,7 +169,7 @@ if(!is_dir('../passwd'))
 }
 
 // 문서설정
-$title = 'GR Board Upgrade: v1.7.7 "바다표범 II" ▶▶▶ 알바트로스 (v1.9.2 BETA) 으로 업데이트 되었습니다.';
+$title = 'GR Board Upgrade: v1.7.7 "바다표범 II" ▶▶▶ 봉고 (v1.9.3 R2 BETA) 으로 업데이트 되었습니다.';
 $preRoute = '..';
 include '../html_head.php';
 ?>
