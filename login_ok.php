@@ -38,16 +38,14 @@ if($id && $password) {
 	// 로그인이 되지 않을 때 @sirini
 	if(!$member['no']) {
 		
-		// 먼저 md5() 이전 세대일지 모르니 확인해본다
-		include 'class/database.php';
-		$DB = new DATABASE;
-		$member = $GR->getArray("select level, no, id from {$dbFIX}member_list where id = '$id' and password = '" . $DB->old_password($password) . "'");
+		// 먼저 md5() 이전 세대일지 모르니 확인해본다 @sirini
+		$member = $GR->getArray("select level, no, id from {$dbFIX}member_list where id = '$id' and password = old_password('$password')");
 		
-		// 비밀번호가 md5 형태로 변환되지 않았으므로 먼저 그 처리를 해준다
+		// 비밀번호가 md5 형태로 변환되지 않았으므로 먼저 그 처리를 해준다 @sirini
 		if($member['no']) {
 			$GR->query("update {$dbFIX}member_list set password = '" . md5($password) . "' where no = '".$member['no']."' limit 1");
 			
-		// 그냥 비밀번호가 틀린 것일 경우 아래 처리
+		// 그냥 비밀번호가 틀린 것일 경우 아래 처리 @sirini
 		} else {
 			if($enableBlock) {
 				$block['blocks']++;
