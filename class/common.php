@@ -5,20 +5,14 @@ if(!$headerGiven){ //별도 지정된 헤더가 없으면 기본헤더
 	@header('Pragma: no-cache');
 	@header('Content-Type: text/html; charset=utf-8');
 }
-elseif($headerGiven == 'N'){ //헤더를 그 파일에서 자체적으로 뿌리고자 하는 경우
-	//Do Nothing
-}
-else { //별도 지정된 헤더가 있으면 그것 뿌림. 예: search_helper.php
-	@header($headerGiven);
-}
+elseif($headerGiven == 'N'){	/*Do Nothing*/ }
+else { @header($headerGiven); }
 @session_save_path($preRoute.'session');
 @session_start();
 define('__GRBOARD__', true);
 
 //---SQL injection 방지 보안 코드 시작
-//참고 : http://kldp.org/node/90787
-//참고 : drupal 소스코드 ( common.inc )
-//참고 : 클래스 내부에 정의되어 있으면 PHP 버젼에 따라 찾지 못하는 문제 있어서 밖으로 빼둠 @sirini
+//참고 : http://kldp.org/node/90787 + drupal 소스코드 ( common.inc )
 function _fix_gpc_magic(&$item) {
 	global $preRoute;
 	require $preRoute.'db_info.php';
@@ -63,8 +57,8 @@ class COMMON {
 
 	// 프로그램 정보 @sirini
 	function grInfo($str='all') {
-		if( $str == 'all' ) $info = '봉고 (v1.9.3 BETA)';
-		elseif( $str == 'version' ) $info = '1.9.3';
+		if( $str == 'all' ) $info = '봉고 (v1.9.3 R2 BETA)';
+		elseif( $str == 'version' ) $info = '1.9.3 R2';
 		elseif( $str == 'status' ) $info = 'BETA';
 		return $info;
 	}
@@ -77,7 +71,7 @@ class COMMON {
 		$this->hostName = $hostName;
 		$this->dbName = $dbName;
 		$this->grTime = $timeDiff;
-		$this->fix_gpc_magic(); //gpc_magic_quotes를 무효화하는 함수 호출
+		$this->fix_gpc_magic();
 	}
 
 	// DB 조작 관련 래핑 메소드 모음 (DB에러 출력안함)
@@ -202,32 +196,5 @@ class COMMON {
 		}
 		$fixed = TRUE;
 	}
-	
-	// MySQL 41바이트 암호화를 php로 구현 php.net
-	function password($password,$option=''){
-    	if($password===null)return null;
-    	if(strlen($password)==0)return '';
-    	$r=sha1(sha1($password,true));
-    	if($option) return $r; else return '*'.strtoupper($r);
-	}
-	
-	// MySQL 16바이트 암호화를 php로 구현 phpschool.com
-	function old_password($password) {
-    	$nr = 1345345333;
-    	$add = 7;
-    	$nr2 = 0x12345671;
-    	$size = strlen($password);
-    	for($i=0;$i<$size;$i++) {
-    		if($password[$i] == ' ' || $password[$i] == '\t') continue; /* skipp space in password */
-    		$tmp = ord($password[$i]);
-    		$nr ^= ((($nr & 63)+$add)*$tmp) + ($nr << 8);
-    		$nr2 += ($nr2 << 8) ^ $nr;
-    		$add += $tmp;
-    		}
-    	$result1=$nr & ((1 << 31) -1); /* Don't use sign bit (str2int) */
-    	$result2=$nr2 & ((1 << 31) -1);
-    	$result = sprintf("%08x%08x",$result1,$result2);
-    	return $result;
-    }
 }
 ?>
