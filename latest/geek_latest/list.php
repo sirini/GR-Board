@@ -5,7 +5,7 @@
 	// 게시물 루프
 	while($latest = $GR->fetch($getData))
 	{
-		$title = cutString(stripslashes($latest['subject']), $cutSize);
+		$title = htmlspecialchars(cutString(stripslashes($latest['subject']), $cutSize));
 		?>
 	<div class="latestSubject"><span class="latestName"><?php echo $latest['name']; ?> |</span>&nbsp;
 	<a href="<?php echo $grboard; ?>/board.php?id=<?php echo $id; ?>&amp;articleNo=<?php echo $latest['no']; ?>"><?php echo $title; ?></a>	

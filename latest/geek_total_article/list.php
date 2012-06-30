@@ -3,7 +3,7 @@
 	// 게시물 루프
 	while($latest = mysql_fetch_array($getData))
 	{
-		$title = cutString(stripslashes($latest['subject']), $cutSize);
+		$title = htmlspecialchars(cutString(stripslashes($latest['subject']), $cutSize));
 		$bbsName = get_bbs_name($latest['id']);
 		?>
 	<div class="geekTotalSubject">
