@@ -94,6 +94,8 @@
 #writeBy { font-size: 11px; font-family: Dotum, 돋움, sans-serif; color: #ccc; text-align: right; }
 #GRBOARD .addedPhotoThumb { padding-bottom: 20px; text-align: center; }
 #GRBOARD .addedPhotoBottom { margin: 0 5px 5px 0; border: #333 1px solid; }
+#GRBOARD div.attachedList { border: #f9f9f9 1px solid; padding: 5px; background-color: #ffffec; }
+#GRBOARD strong.attached { font-size: 18px; font-weight: bold; color: #3e3e3e; }
 
 /* Comment view */
 #layerCoWrite { width: 570px; border: #aaa 2px solid; border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; padding: 5px; background-color: #fff; margin: 15px auto; }

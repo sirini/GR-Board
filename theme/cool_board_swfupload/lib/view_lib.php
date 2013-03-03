@@ -61,7 +61,7 @@ function showImg($filename, $f=1)
 	if($ft == 'jpg' || $ft == 'gif' || $ft == 'png' || $ft == 'bmp') {
 		return '<span><a href="'.$path.'" onclick="return hs.expand(this)" title="클릭하시면 사진을 크게 봅니다"><img src="'.$path.'" width="550px" alt="그림보기" /></a></span>';
 	}
-	else return '[파일받기]';
+	else return '<div class="attachedList"><strong class="attached">[첨부 파일받기]</strong></div>';
 }
 
 // 멤버일 경우 등록된 사진과 자기소개 출력
