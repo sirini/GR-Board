@@ -64,6 +64,7 @@ fclose($fp);
 // session, data, passwd 저장폴더를 생성한다. @sirini
 if(!is_dir($preRoute . 'session')) @mkdir($preRoute . 'session', 0707);
 if(!is_dir($preRoute . 'data')) @mkdir($preRoute . 'data', 0707);
+if(!is_dir($preRoute . 'data/__thumbs__')) @mkdir($preRoute . 'data/__thumbs__', 0707);
 if(!is_dir($preRoute . 'passwd')) @mkdir($preRoute . 'passwd', 0707);
 if(!is_dir($preRoute . 'icon')) @mkdir($preRoute . 'icon', 0707);
 if(!is_dir($preRoute . 'member')) @mkdir($preRoute . 'member', 0707);

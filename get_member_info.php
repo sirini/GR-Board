@@ -3,9 +3,15 @@
 $headerGiven = 'Content-type: text/xml; charset=utf-8';
 include 'class/common.php';
 $GR = new COMMON;
-$GR->dbConn();
+
+// 회원만 볼 수 있도록 수정 @sirini, @코드우편부
+if(!$_SESSION['no'])
+{
+	$GR->error("Permission denied.");
+}
 
 // 회원 정보를 xml 로 반환 @sirini
+$GR->dbConn();
 if($_POST['no']) $uno = (int)$_POST['no']; else exit();
 $memInfo = $GR->getArray('select email, homepage from '.$dbFIX.'member_list where no = \''.$uno.'\'');
 if(!$memInfo['email']) $memInfo['email'] = 0;

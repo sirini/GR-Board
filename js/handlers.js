@@ -27,9 +27,10 @@ function removeFile(id, filename, del, type) {
 	
 	$.ajax({
 		url: 'remove_multi_file.php',
-		dataType: 'xml',
+		dataType: 'json',
+		type: 'POST',
 		data: 'id='+id+'&filename='+filename,
-		success: function(xml) {
+		success: function(json) {
 			alert('파일을 삭제하였습니다.');
 			$("#grProgressID"+del).fadeOut();
 		}

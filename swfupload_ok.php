@@ -7,6 +7,12 @@ $headerGiven = 'N';
 include 'class/common.php';
 $GR = new COMMON;
 
+// 로그인 하지 않은 사용자는 사용 할 수 없다
+if(!$_SESSION['no'])
+{
+	$GR->error('Permission Denied.');
+}
+
 // 에러메시지 출력 @sirini
 function HandleError($message) {
 	header("HTTP/1.1 500 Internal Server Error");

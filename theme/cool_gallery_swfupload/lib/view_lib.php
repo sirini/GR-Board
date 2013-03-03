@@ -2,7 +2,7 @@
 // 글보기시 특정 기능 ON / OFF, 숫자 설정 //
 $setting['enable_facebook'] = 0; # 페이스북에 글 보내기 기능 사용=1, 미사용=0
 $setting['enable_twitter'] = 0; # 트위터에 글 소개하기 기능 사용=1, 미사용=0
-$setting['enable_added_photo_direct_show'] = 1; # 추가 업로드한 사진들을 본문에 바로 보여주기 사용=1, 미사용=0
+$setting['enable_added_photo_direct_show'] = 0; # 추가 업로드한 사진들을 본문에 바로 보여주기 사용=1, 미사용=0
 $setting['thumb_width_size'] = 800; // 글보기에서 썸네일 폭 지정, 0 이면 사용 안함 (px 단위)
 $setting['thumb_width_bottom'] = 50; // 글보기 하단에 추가 첨부한 사진들 사이즈 지정 (px 단위)
 // 글보기시 특정 기능 ON / OFF, 숫자 설정 끝 //

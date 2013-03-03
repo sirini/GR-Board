@@ -21,3 +21,4 @@ $f = @fopen('data/tmpfile.'.$_SERVER['REMOTE_ADDR'], 'w');
 @fwrite($f, $newTmp);
 @fclose($f);
 ?>
+{"result":"OK"}
