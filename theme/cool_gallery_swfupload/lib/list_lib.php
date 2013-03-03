@@ -41,8 +41,8 @@ function makeThumbImage($path, $size)
 	global $theme;
 	if(!$path || !file_exists($path)) return $theme . '/image/no_image.gif';
 	$filename = end(explode('/', $path));
-	$filetype = end(explode('.', $filename));
-	$genFile = 'data/__thumbs__/'.date('Y/m/d').'/'.$filename;
+	$filetype = strtolower(end(explode('.', $filename)));
+	$genFile = 'data/__thumbs__/'.date('Y/m/d').'/'.$size.'_'.$filename;
 	if(file_exists($genFile)) return $genFile;
 	
 	$pre = 'data/__thumbs__';
@@ -56,7 +56,7 @@ function makeThumbImage($path, $size)
 	if( !is_dir($pre . '/' . $y .'/'. $m .'/'. $d) ) { @mkdir($pre . '/' . $y .'/'. $m .'/'. $d, 0705); @chmod($pre . '/' . $y .'/'. $m .'/'. $d, 0707); }
 	
 	$thumb = PhpThumbFactory::create($path);
-	$thumb->resize($size, $size)->save($genFile);
+	$thumb->adaptiveResize($size, $size)->save($genFile);
 	
 	if($filetype == 'jpg' || $filetype == 'jpeg') {
 		$image = imagecreatefromjpeg($genFile);

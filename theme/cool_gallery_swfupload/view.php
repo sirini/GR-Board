@@ -28,29 +28,26 @@ include_once $theme.'/lib/view_lib.php';
 
 </div>
 
-<?php if($isFiles): ?>
-
-	<div class="viewLeft">받은횟수</div>
-	<div class="viewRight"><?php echo $downloadHit; ?></div>
-	<div class="clear"></div>
-
-	<?php for($f=1; $f<11; $f++): if($files[$f]): ?>
-		<div class="viewLeft">첨부파일 <?php echo $f; ?></div>
-		<div class="viewRight">
-			<a href="<?php echo $grboard; ?>/download.php?id=<?php echo $id; ?>&amp;articleNo=<?php echo $articleNo; ?>&amp;num=<?php echo $f; ?>"><?php echo showImg($files[$f], $f); ?></a>
-		</div>
-		<div class="clear"></div>
-	<?php endif; endfor; ?>
-
-<?php endif; ?>
-
 <script src="<?php echo $grboard; ?>/tiny_mce/plugins/media/js/embed.js"></script>
 
 <div class="viewContent">
 
 	<div id="mainContent">
+
+		<?php if($isFiles): ?>
 		
-		<?php echo $content; ?>
+			<?php for($f=1; $f<11; $f++): if($files[$f]): ?>
+				<div class="addedPhotoThumb">
+					<a href="<?php echo $grboard; ?>/download.php?id=<?php echo $id; ?>&amp;articleNo=<?php echo $articleNo; ?>&amp;num=<?php echo $f; ?>"><?php echo showImg($files[$f], $f); ?></a>
+				</div>
+			<?php endif; endfor; ?>
+		
+		<?php endif; ?>
+		
+		<?php 
+		if($setting['enable_added_photo_direct_show']) showAddedPhoto();
+		echo $content; 
+		?>
 		
 		<div id="writeBy">
 			작성자: <?php echo $view['name']; ?>, 작성시각: <?php echo date('Y.m.d H:i:s', $view['signdate']); ?>

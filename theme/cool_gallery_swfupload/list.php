@@ -15,15 +15,13 @@ include_once $theme.'/lib/list_lib.php';
 <?php if($setting['show_header']): ?>
 <thead> 
 <tr>
-	<th class="titleBar">
+	<th class="titleBar" colspan="<?php echo $setting['column_count']; ?>">
 
 	<?php if($isCategory): ?>
-		<th class="titleBar">
 			<select name="chooseCategory" onchange="setCategory(this.value)">
 				<option value="">선택하세요</option>
 				<?php showCategoryComboBox(); ?>
 			</select>
-		</th>
 	<?php endif; ?>
 
 	정렬: 

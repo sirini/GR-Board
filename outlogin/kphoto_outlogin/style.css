@@ -1,0 +1,16 @@
+#grLoginForm ul {
+	margin: -20px 0; 
+	padding: 0;
+	font-family: Dotum, sans-serif;
+	font-size: 11px;
+}
+#grLoginForm li {
+	display: inline;
+	padding: 0 0 0 20px;
+}
+#grLoginForm .in {
+	border: #ddd 1px solid;
+	font-size: 12px;
+}
+#grLoginForm .in:focus { border: #999 1px solid; }
+#grLoginForm .btn { vertical-align: middle; }

@@ -1,0 +1,4 @@
+/* 최근게시물 CSS */
+ul.galleryList { margin: 0; padding: 0; }
+ul.galleryList li { list-style: none; font-size: 12px; }
+ul.galleryList .exifInfo { color: #ccc; font-family: tahoma, sans-serif; font-size: 11px; letter-spacing: 1px; }

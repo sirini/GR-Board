@@ -1,0 +1,12 @@
+/* 최근게시물 CSS */
+.latestSubject { padding: 5px; text-align: left; border-bottom: #fff 2px solid; }
+.latestSubject:hover { background-color: #fff; }
+.latestSubject a { color: #666; text-decoration: none; }
+.latestCommentNum { background-color: #da78bb; font: 9px verdana, sans-serif; color: #fff; padding: 2px; border-radius: 10px; font-weight: bold; }
+.latestName { font-size: 11px; color: #aaa; }
+.latestClear { clear: both; }
+.geekParentBox { text-align: left; padding: 0 0 20px 0; }
+.geekParentBox h3 { margin: 0 0 10px 0; font-size: 12px; padding: 0; }
+.geekParentBox h3 a { font-size: 1.2em; font-weight: bold; }
+.geekParentBox a { padding: 5px; color: #982473; text-decoration: none; font-family: Dotum, sans-serif; font-size: 12px; letter-spacing: 1px; }
+.geekChildBox { background-color: #fafafa; }

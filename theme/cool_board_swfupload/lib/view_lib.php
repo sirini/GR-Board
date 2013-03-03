@@ -1,8 +1,55 @@
 <?php
 // 글보기시 특정 기능 ON / OFF 설정 //
-$setting['enable_facebook'] = 1; # 페이스북에 글 보내기 기능 사용=1, 미사용=0
-$setting['enable_twitter'] = 1; # 트위터에 글 소개하기 기능 사용=1, 미사용=0
+$setting['enable_facebook'] = 0; # 페이스북에 글 보내기 기능 사용=1, 미사용=0
+$setting['enable_twitter'] = 0; # 트위터에 글 소개하기 기능 사용=1, 미사용=0
+$setting['enable_added_photo_direct_show'] = 1; # 추가 업로드한 사진들을 본문에 바로 보여주기 사용=1, 미사용=0
+$setting['thumb_width_size'] = 550; // 글보기에서 썸네일 폭 지정, 0 이면 사용 안함 (px 단위)
+$setting['thumb_width_bottom'] = 50; // 글보기 하단에 추가 첨부한 사진들 사이즈 지정 (px 단위)
 // 글보기시 특정 기능 ON / OFF 설정 끝 //
+
+// 썸네일 이미지 만들기
+function makeThumbImage($path, $width=0)
+{
+	global $theme, $setting;
+	if(!file_exists($path)) return '';
+	if(!$width) $width = $setting['thumb_width_size'];
+	$filename = end(explode('/', $path));
+	$filetype = strtolower(end(explode('.', $filename)));
+	$genFile = 'data/__thumbs__/'.date('Y/m/d').'/'.$width.'_'.$filename;
+	if(file_exists($genFile)) return $genFile;
+	
+	if(!is_dir('data/__thumbs__/'.date('Y'))) @mkdir('data/__thumbs__/'.date('Y'), 0707);
+	if(!is_dir('data/__thumbs__/'.date('Y/m'))) @mkdir('data/__thumbs__/'.date('Y/m'), 0707);
+	if(!is_dir('data/__thumbs__/'.date('Y/m/d'))) @mkdir('data/__thumbs__/'.date('Y/m/d'), 0707);
+	
+	$thumb = PhpThumbFactory::create($path);
+	$thumb->resize($width, $width)->save($genFile);
+	
+	if($filetype == 'jpg' || $filetype == 'jpeg') {
+		$image = imagecreatefromjpeg($genFile);
+		$matrix = array( array(-1, -1, -1), array(-1, 16, -1), array(-1, -1, -1) );
+        $divisor = array_sum(array_map('array_sum', $matrix));
+        $offset = 0; 
+        imageconvolution($image, $matrix, $divisor, $offset);
+		imagejpeg($image, $genFile, 100);	
+	}
+	return $genFile;
+}
+
+// 본문에 추가 첨부된 파일을 보여주기
+function showAddedPhoto()
+{
+	global $dbFIX, $GR, $id, $articleNo;
+	$getExtendFile = $GR->query('select no, file_route from '.$dbFIX.'pds_extend where id = \''.$id.'\' and article_num = '.$articleNo);
+	while($extendFile = $GR->fetch($getExtendFile)) { 
+		$extendFileName = end(explode('/', $extendFile['file_route']));
+		$ft = strtolower(end(explode('.', $extendFileName)));
+		if($ft == 'jpg' || $ft == 'gif' || $ft == 'png' || $ft == 'bmp') {
+			$thumb = makeThumbImage($extendFile['file_route']);
+			if($thumb) echo '<div class="addedPhotoThumb"><a href="'.$extendFile['file_route'].'" onclick="return hs.expand(this)" title="클릭하시면 사진을 크게 봅니다"><img src="'.$thumb.'" alt="미리보기" /></a></div>';
+		}
+	}
+}
 
 // 첨부파일이 그림일 경우 처리하는 함수
 function showImg($filename, $f=1)
@@ -10,24 +57,11 @@ function showImg($filename, $f=1)
 	global $id, $theme, $grboard, $articleNo, $dbFIX, $GR;
 	$getPdsSave = $GR->getArray('select no, file_route'.$f.' from '.$dbFIX.'pds_save where id = \''.$id.'\' and article_num = '.$articleNo.' limit 1');
 	$path = $getPdsSave['file_route'.$f];
-	$ft = end(explode('.', $filename));
+	$ft = strtolower(end(explode('.', $filename)));
 	if($ft == 'jpg' || $ft == 'gif' || $ft == 'png' || $ft == 'bmp') {
-		return '<span><a href="data/'.$id.'/'.$filename.'" onclick="return hs.expand(this)"><img src="'.$path.'" width="50px" height="50px" alt="그림보기" /></a></span>';
+		return '<span><a href="'.$path.'" onclick="return hs.expand(this)" title="클릭하시면 사진을 크게 봅니다"><img src="'.$path.'" width="550px" alt="그림보기" /></a></span>';
 	}
 	else return '[파일받기]';
-}
-
-// swfupload 적용 스킨에서 추가 업로드된 것 처리
-function showDownImg($filename, $extNo)
-{
-	global $id, $theme, $grboard, $dbFIX, $GR;
-	$getPdsList = $GR->getArray('select no, name from '.$dbFIX.'pds_list where type = 1 and uid = '.$extNo);
-	if($getPdsList['no']) $filename = end(explode('/', $getPdsList['name']));
-	$ft = end(explode('.', $filename));
-	if($ft == 'jpg' || $ft == 'gif' || $ft == 'png' || $ft == 'bmp') {
-		return '<a href="'.$getPdsList['name'].'" onclick="return hs.expand(this)">'.$filename.'</a> &nbsp;&nbsp;';
-	}
-	else return '<a href="'.$grboard.'/download.php?id='.$id.'&amp;articleNo='.$articleNo.'&amp;extNo='.$extNo.'">'.$filename.'</a> &nbsp;';
 }
 
 // 멤버일 경우 등록된 사진과 자기소개 출력
@@ -68,12 +102,17 @@ function autoImgResize($maxWidth, $content)
 // 추가 첨부된 파일 목록 출력
 function showAddedFileList()
 {
-	global $dbFIX, $GR, $id, $articleNo;
+	global $dbFIX, $GR, $id, $articleNo, $setting;
 	$extendLoop = 1;
 	$getExtendFile = $GR->query('select no, file_route from '.$dbFIX.'pds_extend where id = \''.$id.'\' and article_num = '.$articleNo);
 	while($extendFile = $GR->fetch($getExtendFile)) { 
 		$extendFileName = end(explode('/', $extendFile['file_route']));
-		echo showDownImg($extendFileName, $extendFile['no']); 
+		$ft = strtolower(end(explode('.', $extendFileName)));
+		if($ft == 'jpg' || $ft == 'gif' || $ft == 'png' || $ft == 'bmp') {
+			$thumb = makeThumbImage($extendFile['file_route'], $setting['thumb_width_bottom']);
+			if($thumb) echo '<a href="'.$extendFile['file_route'].'" onclick="return hs.expand(this)" title="클릭하시면 사진을 크게 봅니다."><img class="addedPhotoBottom" src="'.$thumb.'" alt="미리보기" /></a>';
+		}
+		else echo '<a href="'.$grboard.'/download.php?id='.$id.'&amp;articleNo='.$articleNo.'&amp;extNo='.$extNo.'">'.$extendFileName.'</a> &nbsp;';
 		$extendLoop++; 
 	}
 }
