@@ -43,7 +43,7 @@ include $preRoute . 'html_head.php';
 				<strong>프로그램 명칭</strong>: GR Board<br />
 				<strong>프로그램 버젼</strong>: <?php echo $GR->grInfo('all'); ?><br />
 				<strong>제작자</strong>: 박 희 근 (SIRINI)<br />
-				<strong>라이센스</strong>: GPL (General Public License)<br />
+				<strong>라이센스</strong>: <a href="http://www.gnu.org/licenses/gpl-2.0.html" onclick="window.open(this.href, '_blank'); return false;">GPL (General Public License)</a> (← 클릭 시 라이센스 확인)<br />
 				<strong>Powered by GR Series</strong>: 바른 설계, 빠른 실행!  <span style="color: #32739b">우리가 함께 만들어가고 있습니다!</span>
 				</div>
 			</div>
