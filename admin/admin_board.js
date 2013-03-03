@@ -201,20 +201,20 @@ function deleteCateAll() {
 	}
 }
 
-// onsubmit 이벤트 잡아채기
-document.forms['searchBoard'].onsubmit = isSearchValue;
-
-// btnOver , btnOut 이벤트 잡아채기
-var inputBtn = document.getElementsByTagName('input');
-for(i=0; i<inputBtn.length; i++) {
-	if(inputBtn[i].getAttribute('class') == 'btn') {
-		inputBtn[i].onmouseover = function() { this.setAttribute('src', str_replace('.gif', '_over.gif', this.getAttribute('src'))); }
-		inputBtn[i].onmouseout = function() { this.setAttribute('src', str_replace('_over.gif', '.gif', this.getAttribute('src'))); }
-	}
-}
-
 // 페이지 로드 후 실행
 $(function(){
+
+	// onsubmit 이벤트 잡아채기
+	document.forms['searchBoard'].onsubmit = isSearchValue;
+	
+	// btnOver , btnOut 이벤트 잡아채기
+	var inputBtn = document.getElementsByTagName('input');
+	for(i=0; i<inputBtn.length; i++) {
+		if(inputBtn[i].getAttribute('class') == 'btn') {
+			inputBtn[i].onmouseover = function() { this.setAttribute('src', str_replace('.gif', '_over.gif', this.getAttribute('src'))); }
+			inputBtn[i].onmouseout = function() { this.setAttribute('src', str_replace('_over.gif', '.gif', this.getAttribute('src'))); }
+		}
+	}
 	
 	// 추가 필드 도움말 토글
 	$('#helpAddFieldBtn').toggle(
