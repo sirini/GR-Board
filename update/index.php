@@ -107,7 +107,12 @@ while($list192 = @mysql_fetch_array($bbsList192)) {
 // after v1.9.3 R2
 $que[] = "ALTER TABLE `{$dbFIX}member_list` CHANGE  `password`  `password` CHAR( 32 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT ''";
 
-// run query
+// after v1.9.4
+$getArticleAdjustTheme = @mysql_query("select var from `{$dbFIX}layout_config` where opt = 'article_adjust'");
+if(!$getArticleAdjustTheme['var']) $que[] = "insert into `{$dbFIX}layout_config` set no = '', opt = 'article_adjust', var = 'default'";
+
+
+///////////////////////////////////////////////////////// run query
 for($i=0; $i<count($que); $i++) @mysql_query($que[$i]);
 $getBoardList = @mysql_query('select id from '.$dbFIX.'board_list');
 while($bbslist = @mysql_fetch_array($getBoardList)) {

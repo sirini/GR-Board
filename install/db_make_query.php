@@ -263,5 +263,6 @@ $que[] = "insert into `{$dbFIX}layout_config` set no = '', opt = 'join_skin', va
 $que[] = "insert into `{$dbFIX}layout_config` set no = '', opt = 'memo_skin', var = 'default'";
 $que[] = "insert into `{$dbFIX}layout_config` set no = '', opt = 'report_skin', var = 'new_default'";
 $que[] = "insert into `{$dbFIX}layout_config` set no = '', opt = 'notify_skin', var = 'default'";
+$que[] = "insert into `{$dbFIX}layout_config` set no = '', opt = 'article_adjust', var = 'default'";
 $que[] = "insert into `{$dbFIX}gr_group_list` set no = '', name = 'normal', master = '', make_time = UNIX_TIMESTAMP()";
 ?>

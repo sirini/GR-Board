@@ -22,8 +22,6 @@ $content = autoImgResize($maxImageWidth, $content);
 		<?php endif; ?>
 		
 		<input type="button" onclick="location.href='<?php echo $grboard; ?>/board.php?id=<?php echo $id; ?>&amp;articleNo=<?php echo $articleNo; ?>&amp;good=1';" title="이 글이 좋습니다." value="좋아요 (<?php echo $view['good']; ?>)" /> 
-
-		<input type="button" onclick="window.open('<?php echo $grboard; ?>/view_scrap.php?isAdd=1&amp;id=<?php echo $id; ?>&amp;article_num=<?php echo $articleNo; ?>', 'addScrap', 'width=600,height=650,menubar=no,scrollbars=yes'); return false" title="이 글을 내 스크랩북에 담습니다." value="담기" />
 		
 		<input type="button" onclick="window.open('<?php echo $grboard; ?>/report.php?id=<?php echo $id; ?>&amp;article_num=<?php echo $articleNo; ?>', 'addReport', 'width=600,height=650,menubar=no,scrollbars=yes'); return false" title="이 글을 관리자와 마스터에게 신고합니다." value="신고" />
 	
