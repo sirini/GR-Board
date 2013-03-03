@@ -27,7 +27,7 @@ if($modifyHomepage) $modifyHomepage = trim($modifyHomepage);
 //if($modifySelfInfo) $modifySelfInfo = str_replace('  ', '', strip_tags(m.ysql_real_escape_string(trim($modifySelfInfo))));
 if($modifySelfInfo) $modifySelfInfo = str_replace('  ', '', strip_tags(trim($modifySelfInfo)));
 if(!$viewRows) $viewRows = 10;
-if($modifyPassword) $password = "password = password('$modifyPassword'),";
+if($modifyPassword) $password = "password = md5('$modifyPassword'),";
 
 // 정렬옵션 @sirini
 if(isset($sortList) && $sortList == 'desc') $sortBy = 'asc'; else $sortBy = 'desc';
@@ -225,7 +225,7 @@ if(array_key_exists('isAddMember', $_POST) && $_POST['isAddMember']) {
 	$sqlAddMember = "insert into {$dbFIX}member_list
 	set no = '',
 	id = '$addID',
-	password = password('$addPassword'),
+	password = md5('$addPassword'),
 	nickname = '$addNickname',
 	realname = '$addRealname',
 	email = '',

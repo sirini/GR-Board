@@ -57,8 +57,8 @@ class COMMON {
 
 	// 프로그램 정보 @sirini
 	function grInfo($str='all') {
-		if( $str == 'all' ) $info = '봉고 (v1.9.3 R2 BETA)';
-		elseif( $str == 'version' ) $info = '1.9.3 R2';
+		if( $str == 'all' ) $info = '페어리 펭귄 (v1.9.4 BETA)';
+		elseif( $str == 'version' ) $info = '1.9.4';
 		elseif( $str == 'status' ) $info = 'BETA';
 		return $info;
 	}

@@ -30,11 +30,11 @@ include 'admin/admin_left_menu.php';
 			
 			<ul>
 				<li><a href="#admStatTable">현재상황</a></li>
-				<li><a href="#admLatestArticle">최근 게시물/댓글 기록</a></li>
-				<li><a href="#admSubPageTable">서브 페이지 테마 설정</a></li>
-				<li><a href="#admFilterTable">작성 금지단어 설정</a></li>
+				<li><a href="#admLatestArticle">최근 글 기록</a></li>
+				<li><a href="#admSubPageTable">페이지 테마 설정</a></li>
+				<li><a href="#admFilterTable">금지단어 설정</a></li>
 				<li><a href="#admErrorTable">오류 기록</a></li>
-				<li><a href="#admLoginLogList">최근 로그인 기록</a></li>
+				<li><a href="#admLoginLogList">로그인 기록</a></li>
 			</ul>
 			
 			<!-- 현재상황 -->

@@ -227,7 +227,7 @@ if($_POST['modifyMemberInfo']) {
 
 	$sqlUpdate = 'update '.$dbFIX.'member_list set ';
 	if($_POST['password']) { 
-		$sqlUpdate .= "password = password('$password'),";
+		$sqlUpdate .= "password = md5('$password'),";
 		// 비밀번호 변경시, 회원 Email로 통보 @이동규
 		$PasswordEmail = $GR->getArray("select no, id, realname, email from {$dbFIX}member_list where no = ".$_SESSION['no']);
 		$adminMailAddress = @end($GR->getArray('select email from '.$dbFIX.'member_list where no = 1'));
