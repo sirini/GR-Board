@@ -27,9 +27,7 @@ include_once $theme.'/lib/list_lib.php';
 	<th class="titleBar">
 		<a href="<?php echo $grboard; ?>/board.php?id=<?php echo $id; ?>&amp;sortList=no&amp;sortBy=<?php echo ($sortBy=='desc')?'asc':'desc'; ?>&amp;page=<?php echo $page; ?>">번호</a>
 	</th>
-	
-	<?php if($isAdmin): ?><th class="titleBar"><a href="#" onclick="selectAll();" class="listTopBox">담기</a></th><?php endif; ?>
-	
+		
 	<?php if($isCategory): ?>
 		<th class="titleBar">
 			<select name="chooseCategory" onchange="setCategory(this.value)">
