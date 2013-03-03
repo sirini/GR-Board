@@ -109,6 +109,8 @@ if($_POST['subPageConfirm']) {
 	$GR->query('update '.$dbFIX."layout_config set var = '".$_POST['reportTheme']."' where opt = 'report_skin'");
 	$GR->query('update '.$dbFIX."layout_config set var = '".$_POST['notifyTheme']."' where opt = 'notify_skin'");
 	$GR->query('update '.$dbFIX."layout_config set var = '".$_POST['infoTheme']."' where opt = 'info_skin'");
+	$GR->query('update '.$dbFIX."layout_config set var = '".$_POST['articleAdjustTheme']."' where opt = 'article_adjust'");
+	
 	$GR->error('서브페이지들의 테마를 설정하였습니다.', 0, 'admin.php');
 }
 

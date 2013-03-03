@@ -357,6 +357,24 @@ include 'admin/admin_left_menu.php';
 					</div>
 					<div class="clear"></div>
 				</div>
+
+				<div class="tableListLine">
+					<div class="tableLeft" title="GR보드 자체 내의 글 관리 페이지 테마를 선택합니다.">글 관리 페이지</div>
+					<div class="tableRight">
+					<select name="articleAdjustTheme">
+					<?php
+					$getAASkin = $GR->getArray('select var from '.$dbFIX.'layout_config where opt = \'article_adjust\' limit 1');
+					$getAADir = @opendir('admin/theme/article_adjust/');
+					while($aaDir = @readdir($getAADir)) { 
+						if($aaDir == '.' || $aaDir == '..') continue;
+					?>
+						<option value="<?php echo $aaDir; ?>"<?php echo ($getAASkin['var']==$aaDir)?' selected="selected"':''; ?>><?php echo $aaDir; ?></option>
+					<?php } ?>
+					</select>
+					글 관리 페이지는 권한 있는 사용자(=게시판 관리자)도 사용 할 수 있습니다.
+					</div>
+					<div class="clear"></div>
+				</div>
 	
 				<div class="submitBox">
 					<input type="submit" value="서브 페이지 테마 업데이트" title="GR보드내 보여지는 서브 페이지들의 테마를 변경합니다." />

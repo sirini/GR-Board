@@ -172,26 +172,28 @@ if(!is_dir('../passwd'))
 	@mkdir('../passwd', 0705);
 	@chmod('../passwd', 0707);
 }
-
-// 문서설정
-$title = 'GR Board Upgrade: v1.7.7 "바다표범 II" ▶▶▶ 봉고 (v1.9.3 R2 BETA) 으로 업데이트 되었습니다.';
-$preRoute = '..';
-include '../html_head.php';
 ?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>GR Board Upgrade: v1.7.7 "바다표범 II" ▶▶▶ 페어리 펭귄 (v1.9.4 BETA) 으로 업데이트 되었습니다.</title>
+</head>
 <body>
 
-<h2>GR Board 봉고 (v1.9.3 R2 BETA) 의 업데이트가 완료 되었습니다!</h2>
+<h2>GR Board 페어리 펭귄의 업데이트가 완료 되었습니다!</h2>
 
 <strong>DB Table 업데이트 내역</strong>
 <ul>
-	<li><em>패스워드 저장 길이를 md5 해시길이에 맞게 수정하였습니다. (gr_member_list 의 password 컬럼)</em></li>
+	<li><em>관리화면에서 글 관리 페이지의 테마를 선택할 수 있도록 gr_layout_config 에 article_adjust 항목이 추가되었습니다.</em></li>
+	<li>패스워드 저장 길이를 md5 해시길이에 맞게 수정하였습니다. (gr_member_list 의 password 컬럼)</li>
 	<li>각 게시판마다 트랙백 주소를 받을 수 있는 컬럼 영역을 제거하였습니다. (gr_bbs_* 의 trackback 컬럼)</li>
 	<li>게시판 설정에서 트랙백 받기 유무를 제거하였습니다. (gr_board_list 의 is_trackback 컬럼)</li>
 	<li>트랙백을 별도로 보관하던 장소를 제거하였습니다. (gr_trackback_save)</li>
 	<li>알림 내역들을 기록하는 테이블을 추가하였습니다. (gr_notification)</li>
-  <li>일정 로그인 횟수이상 실패시, 로그인을 차단할 수 있습니다.</li>
-  <li>영문으로만 작성된 글을 차단할 수 있습니다.</li>
-  <li>글 수정시 나타나는, "moderator by" 표시여부를 설정할 수 있습니다.</li>
+	<li>일정 로그인 횟수이상 실패시, 로그인을 차단할 수 있습니다.</li>
+	<li>영문으로만 작성된 글을 차단할 수 있습니다.</li>
+	<li>글 수정시 나타나는, "moderator by" 표시여부를 설정할 수 있습니다.</li>
 	<li>쪽지함의 sender_key 에도 인덱스를 걸었습니다.</li>
 	<li>첨부파일 다운로드 권한 설정 및 파일 다운로드시 포인트 차감 기능 추가합니다.</li>
 	<li>로그인 기록 작성시 접속 아이피와 리퍼러 정보를 추가합니다.</li>
