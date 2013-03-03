@@ -145,9 +145,17 @@ if(!$_SESSION['no']) {
 	}
 }
 
-// 제목, 내용 값 처리
+// 제목, 내용 값 처리 @sirini
 $subject = $view['subject'];
 $content = nl2br($view['content']);
+
+// 내용에서 테이블 태그 줄바꿈 문제 수정 @sirini
+preg_match_all('|<table(.*?)</table>|Usim', $content, $matches, PREG_PATTERN_ORDER);
+$cntTbl = count($matches[0]);
+for($i=0; $i<$cntTbl; $i++) {
+	$removeBR = str_replace('<br />', '', $matches[0][$i]);
+	$content = str_replace($matches[0][$i], $removeBR, $content);
+}
 
 // 내용 중 검색어는 하이라이트 @sirini
 if($searchText) {
