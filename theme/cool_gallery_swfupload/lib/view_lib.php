@@ -1,4 +1,6 @@
 <?php
+define('__GRBOARD_VIEW_LIB__', 1);
+
 // 글보기시 특정 기능 ON / OFF, 숫자 설정 //
 $setting['enable_facebook'] = 0; # 페이스북에 글 보내기 기능 사용=1, 미사용=0
 $setting['enable_twitter'] = 0; # 트위터에 글 소개하기 기능 사용=1, 미사용=0
@@ -8,7 +10,7 @@ $setting['thumb_width_bottom'] = 50; // 글보기 하단에 추가 첨부한 사
 // 글보기시 특정 기능 ON / OFF, 숫자 설정 끝 //
 
 // 썸네일 이미지 만들기
-function makeThumbImage($path, $width=0)
+function makeThumbImageView($path, $width=0)
 {
 	global $theme, $setting;
 	if(!$width) $width = $setting['thumb_width_size'];
@@ -44,7 +46,7 @@ function showImg($filename, $f=1)
 	$path = $getPdsSave['file_route'.$f];
 	$ft = strtolower(end(explode('.', $filename)));
 	if($ft == 'jpg' || $ft == 'jpeg' || $ft == 'gif' || $ft == 'png' || $ft == 'bmp') {
-		$thumb = makeThumbImage($path);
+		$thumb = makeThumbImageView($path);
 		if($thumb) return '<span><a href="'.$path.'" onclick="return hs.expand(this)" title="클릭하시면 사진을 크게 봅니다"><img src="'.$thumb.'" alt="그림보기" /></a></span>';
 	}
 	else return '[파일받기]';
@@ -94,7 +96,7 @@ function showAddedFileList()
 		$extendFileName = end(explode('/', $extendFile['file_route']));
 		$ft = strtolower(end(explode('.', $extendFileName)));
 		if($ft == 'jpg' || $ft == 'gif' || $ft == 'png' || $ft == 'bmp') {
-			$thumb = makeThumbImage($extendFile['file_route'], $setting['thumb_width_bottom']);
+			$thumb = makeThumbImageView($extendFile['file_route'], $setting['thumb_width_bottom']);
 			if($thumb) echo '<a href="'.$extendFile['file_route'].'" onclick="return hs.expand(this)" title="클릭하시면 사진을 크게 봅니다"><img class="addedPhotoBottom" src="'.$thumb.'" alt="미리보기" /></a>';
 		}
 		else echo '<a href="'.$grboard.'/download.php?id='.$id.'&amp;articleNo='.$articleNo.'&amp;extNo='.$extNo.'">'.$extendFileName.'</a> &nbsp;';
@@ -110,7 +112,7 @@ function showAddedPhoto()
 		$extendFileName = end(explode('/', $extendFile['file_route']));
 		$ft = strtolower(end(explode('.', $extendFileName)));
 		if($ft == 'jpg' || $ft == 'gif' || $ft == 'png' || $ft == 'bmp') {
-			$thumb = makeThumbImage($extendFile['file_route']);
+			$thumb = makeThumbImageView($extendFile['file_route']);
 			echo '<div class="addedPhotoThumb"><a href="'.$extendFile['file_route'].'" onclick="return hs.expand(this)" title="클릭하시면 사진을 크게 봅니다"><img src="'.$thumb.'" alt="미리보기" /></a></div>';
 		}
 	}
