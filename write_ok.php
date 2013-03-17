@@ -49,9 +49,9 @@ if($_POST['category']) $category = $_POST['category'];
 if($_POST['subject']) $subject = $_POST['subject'];
 if($_POST['content']) $content = $_POST['content'];
 if($_POST['email']) $email = $_POST['email'];
-if($_POST['homepage']) $homepage = htmlspecialchars(trim($_POST['homepage']));
-if($_POST['link1']) $link1 = htmlspecialchars(trim($_POST['link1']));
-if($_POST['link2']) $link2 = htmlspecialchars(trim($_POST['link2']));
+if($_POST['homepage']) $homepage = htmlentities(trim($_POST['homepage']), ENT_QUOTES);
+if($_POST['link1']) $link1 = addslashes(trim($_POST['link1']));
+if($_POST['link2']) $link2 = addslashes(trim($_POST['link2']));
 if($_POST['is_alert']) $isAlert = $_POST['is_alert'];
 if($_POST['is_timebomb']) $isTimeBomb = $_POST['is_timebomb'];
 if($_POST['bombTime']) $bombTime = $_POST['bombTime'];
@@ -164,6 +164,7 @@ if($isAdmin || $isMaster) {
 	$content = trim($GR->unescape($content));
 	$content = str_replace("\t", '&nbsp;&nbsp;&nbsp;&nbsp;', $content);
 	$content = $GR->escape(strip_tags2($content, $allowTags['is_html'])); //윗윗줄에서 unescape했으므로 다시 escape.
+	$content = preg_replace('|on([a-zA-Z]+)=|', '', $content); // XSS 방지
 	$filterText = @file_get_contents('filter.txt');
 	$filterArray = explode(',', $filterText);
 	$filterNum = count($filterArray);
@@ -171,11 +172,12 @@ if($isAdmin || $isMaster) {
 		if(preg_match('|'.$filterArray[$tf].'|i', $subject)) $GR->error('글제목에 필터링 대상 단어가 있습니다 : '.$filterArray[$tf], 1, 'HISTORY_BACK');
 		if(preg_match('|'.$filterArray[$tf].'|i', $content)) $GR->error('글내용에 필터링 대상 단어가 있습니다 : '.$filterArray[$tf], 1, 'HISTORY_BACK');
 	}
-	  // 영어로만 입력된글 차단
-	  if($tmpFetchBoard['is_english'] > 0) {
-      if(!preg_match('/[\x{1100}-\x{11ff}\x{3130}-\x{318f}\x{ac00}-\x{d7af}]+/u', $content)) $GR->error('스팸성 게시물로 의심되어 차단되었습니다.', 1, 'HISTORY_BACK');
-	  }
-  }
+
+	// 영어로만 입력된글 차단
+	if($tmpFetchBoard['is_english'] > 0) {
+		if(!preg_match('/[\x{1100}-\x{11ff}\x{3130}-\x{318f}\x{ac00}-\x{d7af}]+/u', $content)) $GR->error('스팸성 게시물로 의심되어 차단되었습니다.', 1, 'HISTORY_BACK');
+	}
+}
 
 // 파일 저장하는 경로 생성
 $saveFileDir = 'data/'.$id;
